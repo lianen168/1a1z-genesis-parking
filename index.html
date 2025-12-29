@@ -720,15 +720,20 @@
             position: relative;
         }
         
+        /* 所有1A1z.ai - 初始橙色 */
+        .domain-shrine.bitcoin .domain-code,
+        .domain-shrine.ai .domain-code .address-part {
+            color: var(--bitcoin-orange) !important;
+            text-shadow: 0 0 10px rgba(247, 147, 26, 0.5);
+        }
+        
         .domain-shrine.bitcoin .domain-code {
             font-size: 2rem;
-            color: var(--bitcoin-gold);
         }
         
         /* 完整域名 - 字体小一点，防止换行 */
         .domain-shrine.ai .domain-code {
             font-size: 1.6rem; /* 减小字体大小 */
-            color: var(--ai-blue);
         }
         
         @media (max-width: 768px) {
@@ -1019,26 +1024,20 @@
             }
         }
         
-        /* 1A1z.ai 特定部分闪亮效果 */
-        .domain-code .part-1A1z {
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-        
-        .domain-code .part-ai {
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-        
-        /* 主标题中的1A1z.ai部分效果 */
-        #main-title .part-1A1z {
-            color: var(--bitcoin-gold);
+        /* 主标题中的1A1z.ai部分效果 - 初始橙色 */
+        #main-title {
+            color: var(--bitcoin-orange) !important;
             text-shadow: 0 0 20px rgba(247, 147, 26, 0.5);
         }
         
+        #main-title .part-1A1z {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
         #main-title .part-ai {
-            color: var(--ai-blue);
-            text-shadow: 0 0 20px rgba(102, 204, 255, 0.5);
+            display: inline-block;
+            transition: all 0.3s ease;
         }
         
         /* .ai 后缀钻石闪光效果 */
@@ -1131,16 +1130,31 @@
             }
         }
         
-        /* 完整域名渐变效果 - 蓝色到橙色渐变 */
-        .full-domain-gradient {
+        /* 完整域名地址部分波浪效果 */
+        .wave-effect {
             display: inline-block;
         }
         
-        .full-domain-gradient .char-glow {
+        .wave-effect .wave-char {
             display: inline-block;
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+            color: var(--bitcoin-orange);
+            text-shadow: 0 0 5px rgba(247, 147, 26, 0.5);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .wave-effect.wave-active .wave-char {
+            animation: wave-color-change 1.5s ease-in-out;
+        }
+        
+        @keyframes wave-color-change {
+            0%, 100% {
+                color: var(--bitcoin-orange);
+                text-shadow: 0 0 5px rgba(247, 147, 26, 0.5);
+            }
+            50% {
+                color: var(--ai-blue);
+                text-shadow: 0 0 15px rgba(102, 204, 255, 0.8);
+            }
         }
         
         /* 比特币价格显示样式 */
@@ -1262,7 +1276,7 @@
             
             <div class="domain-shrine ai" id="domain-full">
                 <div class="shrine-icon">⎙</div>
-                <div class="domain-code full-domain-gradient" id="full-domain">
+                <div class="domain-code" id="full-domain">
                     <!-- 字符将在这里通过JavaScript动态生成 -->
                 </div>
                 <div class="domain-purpose">
@@ -1373,54 +1387,72 @@
             });
         }
         
-        // ===================== 新增效果2：1A1z.ai 特定部分闪光 =====================
+        // ===================== 修改1：所有1A1z.ai - 初始橙色，悬停时.ai发亮 =====================
         function init1A1zAiHighlightEffect() {
-            const elements = document.querySelectorAll('.part-1A1z, .part-ai');
-            
-            elements.forEach(element => {
-                const parent = element.closest('.domain-code, h1');
+            // 处理主标题
+            const mainTitle = document.getElementById('main-title');
+            if (mainTitle) {
+                const part1A1z = mainTitle.querySelector('.part-1A1z');
+                const partAi = mainTitle.querySelector('.part-ai');
                 
-                // 桌面端鼠标悬停效果
-                parent.addEventListener('mouseenter', function() {
-                    if (element.classList.contains('part-1A1z')) {
-                        // 1A1z部分：比特币橙色闪光
-                        element.style.color = 'var(--bitcoin-orange)';
-                        element.style.textShadow = '0 0 15px var(--bitcoin-orange), 0 0 30px var(--bitcoin-orange)';
-                        element.style.transform = 'scale(1.05)';
-                    } else if (element.classList.contains('ai-diamond')) {
-                        // .ai部分：钻石闪光
-                        element.classList.add('ai-glowing');
+                // 初始橙色
+                mainTitle.style.color = 'var(--bitcoin-orange)';
+                mainTitle.style.textShadow = '0 0 20px rgba(247, 147, 26, 0.5)';
+                
+                // 悬停效果
+                mainTitle.addEventListener('mouseenter', function() {
+                    if (partAi) {
+                        partAi.classList.add('ai-glowing');
                     }
                 });
                 
-                parent.addEventListener('mouseleave', function() {
-                    if (element.classList.contains('part-1A1z')) {
-                        // 恢复原来的颜色
-                        if (parent.id === 'main-title') {
-                            element.style.color = 'var(--bitcoin-gold)';
-                        } else {
-                            element.style.color = '';
-                        }
-                        element.style.textShadow = '';
-                        element.style.transform = '';
-                    } else if (element.classList.contains('ai-diamond')) {
-                        element.classList.remove('ai-glowing');
-                        // 恢复原来的颜色
-                        if (parent.id === 'main-title') {
-                            element.style.color = 'var(--ai-blue)';
-                        }
+                mainTitle.addEventListener('mouseleave', function() {
+                    if (partAi) {
+                        partAi.classList.remove('ai-glowing');
                     }
                 });
                 
                 // 移动端触摸效果
-                if (parent.id === 'main-title' || parent.closest('.domain-shrine')) {
-                    addTouchFeedback(parent);
+                addTouchFeedback(mainTitle);
+            }
+            
+            // 处理所有1A1z.ai域名卡片
+            const simpleDomainElements = document.querySelectorAll('#domain-1A1z .domain-code');
+            simpleDomainElements.forEach(element => {
+                const part1A1z = element.querySelector('.part-1A1z');
+                const partAi = element.querySelector('.part-ai');
+                
+                // 初始橙色
+                if (part1A1z) {
+                    part1A1z.style.color = 'var(--bitcoin-orange)';
+                    part1A1z.style.textShadow = '0 0 10px rgba(247, 147, 26, 0.5)';
+                }
+                
+                if (partAi) {
+                    partAi.style.color = 'var(--bitcoin-orange)';
+                    partAi.style.textShadow = '0 0 10px rgba(247, 147, 26, 0.5)';
+                }
+                
+                // 悬停效果
+                const parentCard = element.closest('.domain-shrine');
+                if (parentCard) {
+                    parentCard.addEventListener('mouseenter', function() {
+                        if (partAi) {
+                            partAi.classList.add('ai-glowing');
+                        }
+                    });
+                    
+                    parentCard.addEventListener('mouseleave', function() {
+                        if (partAi) {
+                            partAi.classList.remove('ai-glowing');
+                        }
+                    });
                 }
             });
         }
         
-        // ===================== 新增效果3：完整域名字符渐变效果（蓝色到橙色） =====================
-        function initFullDomainGradientEffect() {
+        // ===================== 修改2：完整域名波浪效果 =====================
+        function initFullDomainWaveEffect() {
             const domainElement = document.getElementById('full-domain');
             if (!domainElement) return;
             
@@ -1429,87 +1461,86 @@
             const suffixPart = '.ai';
             const addressChars = addressPart.split('');
             
-            // 创建渐变字符
+            // 创建地址部分字符
             domainElement.innerHTML = '';
             
-            // 生成地址部分的渐变字符（蓝色到橙色）
+            // 创建波浪效果容器
+            const waveContainer = document.createElement('span');
+            waveContainer.className = 'wave-effect address-part';
+            
+            // 生成地址部分的字符
             addressChars.forEach((char, index) => {
                 const span = document.createElement('span');
                 span.textContent = char;
-                span.className = 'char-glow';
-                
-                // 计算渐变位置：从蓝色（0%）到橙色（100%）
-                const percentage = (index / (addressChars.length - 1)) * 100;
-                const blueColor = '66, 204, 255'; // RGB for #66CCFF
-                const orangeColor = '247, 147, 26'; // RGB for #F7931A
-                
-                // 计算中间颜色
-                const r = Math.round(66 + (247 - 66) * (percentage / 100));
-                const g = Math.round(204 + (147 - 204) * (percentage / 100));
-                const b = Math.round(255 + (26 - 255) * (percentage / 100));
-                
-                span.style.background = `linear-gradient(90deg, rgb(${blueColor}), rgb(${orangeColor}))`;
-                span.style.backgroundClip = 'text';
-                span.style.webkitBackgroundClip = 'text';
-                span.style.color = 'transparent';
-                span.style.textShadow = `0 0 5px rgba(${r}, ${g}, ${b}, 0.5)`;
-                
-                domainElement.appendChild(span);
+                span.className = 'wave-char';
+                span.style.animationDelay = `${index * 0.05}s`; // 每个字符延迟0.05秒
+                waveContainer.appendChild(span);
             });
+            
+            domainElement.appendChild(waveContainer);
             
             // 添加.ai后缀
             const aiSpan = document.createElement('span');
             aiSpan.textContent = suffixPart;
             aiSpan.className = 'ai-diamond';
-            aiSpan.style.color = 'var(--ai-blue)';
-            aiSpan.style.textShadow = '0 0 10px var(--ai-blue)';
+            aiSpan.style.color = 'var(--bitcoin-orange)';
+            aiSpan.style.textShadow = '0 0 5px rgba(247, 147, 26, 0.5)';
             domainElement.appendChild(aiSpan);
             
             // 为整个域名添加悬停效果
             const domainCard = document.getElementById('domain-full');
+            let isAnimating = false;
             
             // 桌面端鼠标悬停效果
             domainCard.addEventListener('mouseenter', function() {
-                // .ai部分钻石闪光
-                const aiElement = domainElement.querySelector('.ai-diamond');
-                if (aiElement) {
-                    aiElement.classList.add('ai-glowing');
-                }
+                if (isAnimating) return;
+                isAnimating = true;
                 
-                // 增强所有字符的光晕
-                const chars = domainElement.querySelectorAll('.char-glow');
-                chars.forEach(char => {
-                    const currentColor = char.style.textShadow.match(/\d+/g);
-                    if (currentColor && currentColor.length >= 3) {
-                        const r = parseInt(currentColor[0]);
-                        const g = parseInt(currentColor[1]);
-                        const b = parseInt(currentColor[2]);
-                        char.style.textShadow = `0 0 15px rgba(${r}, ${g}, ${b}, 0.8), 0 0 30px rgba(${r}, ${g}, ${b}, 0.4)`;
-                    }
-                });
+                // 启动波浪效果
+                waveContainer.classList.add('wave-active');
+                
+                // .ai部分钻石闪光
+                aiSpan.classList.add('ai-glowing');
+                
+                // 动画完成后重置
+                setTimeout(() => {
+                    waveContainer.classList.remove('wave-active');
+                    isAnimating = false;
+                }, 1500);
             });
             
             domainCard.addEventListener('mouseleave', function() {
                 // 移除.ai部分钻石闪光
-                const aiElement = domainElement.querySelector('.ai-diamond');
-                if (aiElement) {
-                    aiElement.classList.remove('ai-glowing');
-                }
-                
-                // 恢复字符光晕
-                const chars = domainElement.querySelectorAll('.char-glow');
-                chars.forEach((char, index) => {
-                    const percentage = (index / (addressChars.length - 1)) * 100;
-                    const blueColor = '66, 204, 255';
-                    const orangeColor = '247, 147, 26';
-                    const r = Math.round(66 + (247 - 66) * (percentage / 100));
-                    const g = Math.round(204 + (147 - 204) * (percentage / 100));
-                    const b = Math.round(255 + (26 - 255) * (percentage / 100));
-                    char.style.textShadow = `0 0 5px rgba(${r}, ${g}, ${b}, 0.5)`;
-                });
+                aiSpan.classList.remove('ai-glowing');
             });
             
             // 移动端触摸效果
+            domainCard.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                if (isAnimating) return;
+                isAnimating = true;
+                
+                this.classList.add('touch-feedback');
+                
+                // 启动波浪效果
+                waveContainer.classList.add('wave-active');
+                
+                // .ai部分钻石闪光
+                aiSpan.classList.add('ai-glowing');
+                
+                // 动画完成后重置
+                setTimeout(() => {
+                    waveContainer.classList.remove('wave-active');
+                    this.classList.remove('touch-feedback');
+                    isAnimating = false;
+                }, 1500);
+            }, { passive: false });
+            
+            domainCard.addEventListener('touchend', function() {
+                // 移除.ai部分钻石闪光
+                aiSpan.classList.remove('ai-glowing');
+            });
+            
             addTouchFeedback(domainCard);
         }
         
@@ -2128,8 +2159,8 @@
             
             // 初始化所有新增效果
             initSatoshiAvatarEffect();
-            init1A1zAiHighlightEffect();
-            initFullDomainGradientEffect();
+            init1A1zAiHighlightEffect(); // 修改后的效果
+            initFullDomainWaveEffect(); // 修改后的波浪效果
             initAllAiSuffixGlowEffect();
             
             // 初始化原有的悬停效果
@@ -2157,11 +2188,19 @@
                     const domainCode = this.querySelector('.domain-code');
                     let domainText = '';
                     
-                    if (domainCode.id === 'full-domain') {
+                    if (this.id === 'domain-full') {
                         // 对于完整域名，获取所有文本内容
-                        const spans = domainCode.querySelectorAll('span');
-                        domainText = Array.from(spans).map(span => span.textContent).join('');
-                        domainText += '.ai'; // 添加.ai后缀
+                        const waveContainer = domainCode.querySelector('.wave-effect');
+                        const aiSpan = domainCode.querySelector('.ai-diamond');
+                        
+                        let addressText = '';
+                        if (waveContainer) {
+                            const chars = waveContainer.querySelectorAll('.wave-char');
+                            addressText = Array.from(chars).map(char => char.textContent).join('');
+                        }
+                        
+                        const aiText = aiSpan ? aiSpan.textContent : '';
+                        domainText = addressText + aiText;
                     } else {
                         domainText = domainCode ? domainCode.textContent : '';
                     }
