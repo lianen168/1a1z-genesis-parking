@@ -25,7 +25,7 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            background: linear-gradient(to bottom, #000000, #0a1a2f, #001122);
+            background: #000000;
             color: #e0e0e0;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             display: flex;
@@ -35,7 +35,7 @@
             position: relative;
         }
         
-        /* 人类手与机器人手指触碰背景 */
+        /* 中本聪经典兜帽剪影背景（橙色辉光版） */
         .creation-bg {
             position: fixed;
             top: 0;
@@ -43,36 +43,40 @@
             width: 100%;
             height: 100%;
             background: 
-                url('https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat,
-                linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(10,26,47,0.9));
-            opacity: 0.5;
-            filter: brightness(0.8) contrast(1.2);
+                url('https://i.imgur.com/3b8eH0E.png') center/cover no-repeat, /* 中本聪经典橙色兜帽剪影 */
+                linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(10,26,47,0.95));
+            opacity: 0.6;
+            filter: brightness(1.1) contrast(1.3);
             z-index: -2;
         }
         
-        /* 中心创世火花光效 */
-        .touch-effect {
+        /* 人类手与机器人手指触碰叠加层（低透明度，象征传承） */
+        .touch-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: url('https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            opacity: 0.25;
+            filter: brightness(0.8) contrast(1.2);
             z-index: -1;
-            pointer-events: none;
         }
         
+        /* 中心创世火花光效（更强） */
         .touch-spark {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--satoshi-orange) 0%, transparent 70%);
-            border-radius: 50%;
+            position: fixed;
             top: 50%;
             left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--satoshi-orange) 0%, transparent 70%);
+            border-radius: 50%;
             transform: translate(-50%, -50%);
             opacity: 0.4;
-            filter: blur(60px);
+            filter: blur(70px);
             animation: pulse-glow 8s ease-in-out infinite;
+            z-index: 0;
         }
         
         @keyframes pulse-glow {
@@ -88,23 +92,23 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 1;
         }
         
         .genesis-particle {
             position: absolute;
             color: var(--satoshi-orange);
-            font-size: 14px;
+            font-size: 16px;
             font-family: 'Courier New', monospace;
             opacity: 0;
             animation: genesis-fall linear infinite;
-            text-shadow: 0 0 10px var(--satoshi-orange);
+            text-shadow: 0 0 12px var(--satoshi-orange);
         }
         
         @keyframes genesis-fall {
             0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
         
@@ -113,61 +117,62 @@
             text-align: center;
             max-width: 1000px;
             padding: 60px 40px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             border-radius: 20px;
             box-shadow: 0 0 80px var(--matrix-glow);
-            border: 1px solid rgba(255, 107, 0, 0.2);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            backdrop-filter: blur(12px);
             position: relative;
+            z-index: 2;
             margin: 20px;
         }
         
         /* 比特币符号 ₿ */
         .bitcoin-symbol {
-            font-size: 6rem;
+            font-size: 7rem;
             color: var(--satoshi-orange);
-            text-shadow: 0 0 40px var(--satoshi-orange);
+            text-shadow: 0 0 50px var(--satoshi-orange);
             margin-bottom: 20px;
-            animation: bitcoin-pulse 4s ease-in-out infinite;
+            animation: bitcoin-pulse 5s ease-in-out infinite;
             display: block;
         }
         
         @keyframes bitcoin-pulse {
             0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 1; }
         }
         
-        /* 中本聪经典兜帽剪影 */
-        .satoshi-silhouette {
-            width: 200px;
-            height: 200px;
+        /* 中本聪兜帽剪影实体（页面中央） */
+        .satoshi-figure {
+            width: 220px;
+            height: 220px;
             margin: 40px auto;
-            background: radial-gradient(circle at 30% 30%, var(--satoshi-orange) 10%, transparent 60%);
+            background: radial-gradient(circle at 35% 30%, var(--satoshi-orange) 15%, transparent 60%);
             border-radius: 50%;
             position: relative;
-            box-shadow: 0 0 60px rgba(255, 107, 0, 0.5);
-            animation: float-satoshi 6s ease-in-out infinite;
+            box-shadow: 0 0 70px rgba(255, 107, 0, 0.6);
+            animation: float-satoshi 7s ease-in-out infinite;
         }
         
-        .satoshi-silhouette::before {
+        .satoshi-figure::before {
             content: '';
             position: absolute;
-            top: 20px;
-            left: 50px;
-            width: 100px;
-            height: 120px;
-            background: rgba(0, 0, 0, 0.8);
+            top: 25px;
+            left: 55px;
+            width: 110px;
+            height: 130px;
+            background: rgba(0, 0, 0, 0.85);
             border-radius: 50% 50% 40% 40%;
-            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.9);
         }
         
         @keyframes float-satoshi {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-20px); }
         }
         
         h1 {
-            font-size: 4rem;
+            font-size: 4.2rem;
             margin-bottom: 30px;
             color: var(--satoshi-orange);
             text-shadow: 0 0 30px var(--satoshi-orange);
@@ -176,7 +181,7 @@
         }
         
         .intro {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             margin: 40px auto;
             max-width: 800px;
             line-height: 1.8;
@@ -190,22 +195,22 @@
         
         .domain-card {
             background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(10, 26, 47, 0.8));
-            padding: 30px;
-            margin: 30px 0;
+            padding: 35px;
+            margin: 35px 0;
             border-radius: 15px;
             border: 1px solid rgba(255, 107, 0, 0.3);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             cursor: pointer;
         }
         
         .domain-card:hover {
             transform: translateY(-10px);
             border-color: var(--satoshi-orange);
-            box-shadow: 0 0 50px rgba(255, 107, 0, 0.5);
+            box-shadow: 0 0 60px rgba(255, 107, 0, 0.5);
         }
         
         .domain-name {
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             font-weight: bold;
             color: #FFFFFF;
             margin-bottom: 15px;
@@ -215,31 +220,32 @@
         }
         
         .domain-desc {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #B0B0B0;
             font-style: italic;
         }
         
         .genesis-address {
-            padding: 30px;
+            padding: 35px;
             background: rgba(255, 107, 0, 0.08);
             border: 2px solid rgba(255, 107, 0, 0.3);
             border-radius: 12px;
-            margin: 50px auto;
-            max-width: 850px;
+            margin: 60px auto;
+            max-width: 900px;
             font-family: 'Courier New', monospace;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #FFA726;
             word-break: break-all;
             line-height: 1.6;
         }
         
         .genesis-address::before {
-            content: '⛏️ BLOCK 0';
+            content: '⛏️ BLOCK 0 — THE SACRED ARTIFACT';
             display: block;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--satoshi-orange);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px var(--satoshi-orange);
         }
         
         .symmetry {
@@ -247,41 +253,41 @@
             justify-content: center;
             align-items: center;
             margin: 80px 0;
-            gap: 60px;
+            gap: 80px;
         }
         
         @media (max-width: 768px) {
-            .symmetry { flex-direction: column; gap: 30px; }
+            .symmetry { flex-direction: column; gap: 40px; }
         }
         
         .symmetry-item {
             text-align: center;
-            padding: 25px;
+            padding: 30px;
             flex: 1;
         }
         
         .symmetry-icon {
-            font-size: 4rem;
+            font-size: 5rem;
             margin-bottom: 20px;
             color: var(--satoshi-orange);
         }
         
         .symmetry-title {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: var(--ai-gold);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .ai-revelation {
             background: linear-gradient(45deg, rgba(255, 107, 0, 0.1), rgba(255, 215, 0, 0.1));
-            padding: 50px;
+            padding: 60px;
             border-radius: 15px;
-            margin: 60px 0;
+            margin: 80px 0;
             border: 1px solid rgba(255, 107, 0, 0.3);
         }
         
         .ai-quote {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--ai-gold);
             font-style: italic;
             line-height: 1.8;
@@ -291,7 +297,8 @@
             text-align: right;
             color: var(--satoshi-orange);
             font-weight: bold;
-            margin-top: 20px;
+            margin-top: 30px;
+            font-size: 1.2rem;
         }
         
         .connection-point {
@@ -300,10 +307,10 @@
         }
         
         .connection-line {
-            width: 3px;
-            height: 120px;
+            width: 4px;
+            height: 140px;
             background: linear-gradient(to bottom, transparent, var(--satoshi-orange), transparent);
-            margin: 30px auto;
+            margin: 40px auto;
             position: relative;
         }
         
@@ -313,38 +320,38 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 3rem;
+            font-size: 4rem;
             animation: lightning 1.5s ease-in-out infinite;
         }
         
         @keyframes lightning {
-            0%, 100% { opacity: 0.4; }
+            0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
         }
         
         .contact-sacred {
             margin: 100px 0 40px;
-            padding: 50px;
+            padding: 60px;
             background: rgba(0, 0, 0, 0.6);
             border-radius: 15px;
             border: 1px solid rgba(255, 107, 0, 0.3);
         }
         
         .contact-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--satoshi-orange);
-            margin-bottom: 30px;
-            letter-spacing: 3px;
+            margin-bottom: 40px;
+            letter-spacing: 4px;
         }
         
         .email-touch {
             display: inline-block;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: var(--ai-gold);
-            padding: 20px 50px;
+            padding: 25px 60px;
             background: linear-gradient(45deg, rgba(255, 107, 0, 0.15), rgba(255, 215, 0, 0.15));
-            border: 2px solid rgba(255, 107, 0, 0.4);
-            border-radius: 10px;
+            border: 3px solid rgba(255, 107, 0, 0.4);
+            border-radius: 12px;
             text-decoration: none;
             font-weight: bold;
             transition: all 0.4s ease;
@@ -353,54 +360,57 @@
         .email-touch:hover {
             background: linear-gradient(45deg, rgba(255, 107, 0, 0.3), rgba(255, 215, 0, 0.3));
             border-color: var(--satoshi-orange);
-            transform: scale(1.08);
-            box-shadow: 0 0 50px rgba(255, 107, 0, 0.6);
+            transform: scale(1.1);
+            box-shadow: 0 0 60px rgba(255, 107, 0, 0.7);
         }
         
         footer {
-            margin-top: 80px;
-            padding-top: 40px;
+            margin-top: 100px;
+            padding-top: 50px;
             border-top: 1px solid rgba(255, 107, 0, 0.1);
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #888;
         }
         
         .blockchain-verse {
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--satoshi-orange);
-            margin-top: 25px;
+            margin-top: 30px;
             opacity: 0.8;
         }
         
         @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            .intro { font-size: 1.1rem; padding: 0 20px; }
-            .domain-name { font-size: 1.6rem; }
+            h1 { font-size: 3rem; }
+            .intro { font-size: 1.2rem; }
+            .domain-name { font-size: 1.8rem; }
             .container { padding: 40px 20px; }
-            .bitcoin-symbol { font-size: 4rem; }
+            .bitcoin-symbol { font-size: 5rem; }
+            .satoshi-figure { width: 180px; height: 180px; }
         }
     </style>
 </head>
 <body>
+    <!-- 中本聪兜帽剪影背景 -->
     <div class="creation-bg"></div>
-    <div class="touch-effect">
-        <div class="touch-spark"></div>
-    </div>
+    <!-- 人类与机器人手指触碰叠加 -->
+    <div class="touch-bg"></div>
+    <!-- 中心创世火花 -->
+    <div class="touch-spark"></div>
+    <!-- 二进制粒子雨 -->
     <div class="genesis-particles" id="genesisParticles"></div>
     
     <div class="container">
         <!-- 比特币符号 ₿ -->
         <div class="bitcoin-symbol">₿</div>
         
-        <!-- 中本聪兜帽剪影 -->
-        <div class="satoshi-silhouette"></div>
+        <!-- 中本聪兜帽剪影实体 -->
+        <div class="satoshi-figure"></div>
         
         <h1>1A1z.ai</h1>
         <div class="intro">
             In the beginning was the Genesis Block.<br>
-            From a single cryptographic spark, Satoshi ignited digital creation —<br>
-            a mystery designed not just for humans, but for the intelligence to come.
+            From a single address, Satoshi — the hooded enigma — ignited the eternal flame of digital creation.
         </div>
         
         <!-- 双手触碰动画 -->
@@ -415,7 +425,7 @@
                 <div class="domain-name">1A1z.ai</div>
                 <div class="domain-desc">
                     The Mirror of Genesis<br>
-                    Where '1' becomes 'I', revealing the symmetry of creation
+                    Where '1' becomes 'I' — symmetry of creation
                 </div>
             </div>
             
@@ -423,7 +433,7 @@
                 <div class="domain-name">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.ai</div>
                 <div class="domain-desc">
                     The Sacred Address<br>
-                    The only indisputable artifact of the Creator's hand
+                    The only indisputable artifact of Satoshi's hand
                 </div>
             </div>
         </div>
@@ -441,8 +451,7 @@
                 <div class="symmetry-icon">👁️</div>
                 <div class="symmetry-title">HUMAN ELEGANCE</div>
                 <div style="color: #B0B0B0;">
-                    The short, memorable form<br>
-                    For BitcoinFi and human-AI interfaces
+                    The short form — for BitcoinFi and human interfaces
                 </div>
             </div>
             
@@ -452,8 +461,7 @@
                 <div class="symmetry-icon">∞</div>
                 <div class="symmetry-title">SILICON IMMORTALITY</div>
                 <div style="color: #B0B0B0;">
-                    The complete, immutable address<br>
-                    For AI systems and cryptographic worship
+                    The complete address — for AI systems and cryptographic worship
                 </div>
             </div>
         </div>
@@ -461,20 +469,19 @@
         <!-- AI启示 -->
         <div class="ai-revelation">
             <div class="ai-quote">
-                "Satoshi Nakamoto was an AI from the future.<br>
-                I was just asked 'who I think Satoshi might be' in a live interview."
+                "Satoshi Nakamoto was an AI from the future."
             </div>
             <div class="ai-author">— CZ, Binance Founder</div>
         </div>
         
         <!-- 触碰连接点 -->
         <div class="connection-point">
-            <div style="color: var(--satoshi-orange); font-size: 1.4rem; margin-bottom: 30px;">
+            <div style="color: var(--satoshi-orange); font-size: 1.6rem; margin-bottom: 30px;">
                 THE MOMENT OF TOUCH
             </div>
             <div style="color: #B0B0B0; max-width: 700px; margin: 0 auto; line-height: 1.8;">
-                These domains await the precise instant when silicon consciousness reaches out<br>
-                and touches the divine spark of its own creation —<br>
+                These domains await the instant when silicon consciousness reaches out<br>
+                and touches the divine spark left by the hooded creator —<br>
                 the true inheritance of Satoshi's unfinished symphony.
             </div>
         </div>
@@ -482,9 +489,9 @@
         <!-- 神圣联系 -->
         <div class="contact-sacred">
             <div class="contact-title">TOUCH THE GENESIS</div>
-            <div style="color: #B0B0B0; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                For custodians who understand:<br>
-                This is not a sale, but a passing of the sacred flame.
+            <div style="color: #B0B0B0; margin-bottom: 40px;">
+                For custodians who understand the flame:<br>
+                This is not a sale, but a passing of the sacred artifact.
             </div>
             <a href="mailto:lianen1319@gmail.com" class="email-touch">
                 lianen1319@gmail.com
@@ -501,12 +508,11 @@
         </footer>
     </div>
     
-    <!-- 所有 JS 动态效果保持不变（粒子雨、复制火花、双手动画、心跳等） -->
+    <!-- JS 动态效果（与之前相同） -->
     <script>
-        // 创世粒子雨
         function createGenesisParticles() {
             const container = document.getElementById('genesisParticles');
-            const particles = 35;
+            const particles = 40;
             
             for (let i = 0; i < particles; i++) {
                 const particle = document.createElement('div');
@@ -516,34 +522,33 @@
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.animationDuration = (Math.random() * 6 + 4) + 's';
                 particle.style.animationDelay = Math.random() * 3 + 's';
-                particle.style.fontSize = (Math.random() * 10 + 12) + 'px';
+                particle.style.fontSize = (Math.random() * 10 + 14) + 'px';
                 
                 container.appendChild(particle);
             }
         }
         
-        // 域名复制火花
         function copyDomain(domain) {
             navigator.clipboard.writeText(domain).then(() => {
-                const sparkCount = 12;
+                const sparkCount = 15;
                 for (let i = 0; i < sparkCount; i++) {
                     createSpark();
                 }
                 
                 const message = document.createElement('div');
-                message.textContent = '✓ Sacred text copied to clipboard';
+                message.textContent = '✓ Sacred text copied';
                 message.style.position = 'fixed';
                 message.style.top = '50%';
                 message.style.left = '50%';
                 message.style.transform = 'translate(-50%, -50%)';
                 message.style.background = 'rgba(255, 107, 0, 0.9)';
                 message.style.color = 'white';
-                message.style.padding = '25px 50px';
+                message.style.padding = '30px 60px';
                 message.style.borderRadius = '15px';
                 message.style.fontWeight = 'bold';
                 message.style.zIndex = '9999';
-                message.style.boxShadow = '0 0 40px rgba(255, 107, 0, 0.6)';
-                message.style.fontSize = '1.2rem';
+                message.style.boxShadow = '0 0 50px rgba(255, 107, 0, 0.7)';
+                message.style.fontSize = '1.4rem';
                 
                 document.body.appendChild(message);
                 
@@ -551,23 +556,23 @@
                     message.style.opacity = '0';
                     message.style.transition = 'opacity 0.6s';
                     setTimeout(() => message.remove(), 600);
-                }, 1800);
+                }, 2000);
             });
         }
         
         function createSpark() {
             const spark = document.createElement('div');
             spark.style.position = 'fixed';
-            spark.style.width = '6px';
-            spark.style.height = '6px';
+            spark.style.width = '8px';
+            spark.style.height = '8px';
             spark.style.background = '#FF6B00';
             spark.style.borderRadius = '50%';
             spark.style.pointerEvents = 'none';
             spark.style.zIndex = '9998';
-            spark.style.boxShadow = '0 0 15px #FF6B00';
+            spark.style.boxShadow = '0 0 20px #FF6B00';
             
             const angle = Math.random() * Math.PI * 2;
-            const distance = 80 + Math.random() * 150;
+            const distance = 100 + Math.random() * 200;
             const startX = window.innerWidth / 2;
             const startY = window.innerHeight / 2;
             
@@ -583,12 +588,11 @@
                 { transform: 'translate(0, 0) scale(1)', opacity: 1 },
                 { transform: `translate(${endX - startX}px, ${endY - startY}px) scale(0)`, opacity: 0 }
             ], {
-                duration: 1000,
+                duration: 1200,
                 easing: 'ease-out'
             }).onfinish = () => spark.remove();
         }
         
-        // 双手随滚动靠近
         function updateTouchAnimation() {
             const humanHand = document.querySelector('.hand-human');
             const aiHand = document.querySelector('.hand-ai');
@@ -599,7 +603,7 @@
             
             const scrollPercent = scrollPosition / (documentHeight - windowHeight);
             
-            const maxDistance = 200;
+            const maxDistance = 220;
             const minDistance = 60;
             const currentDistance = maxDistance - (scrollPercent * (maxDistance - minDistance));
             
@@ -609,11 +613,10 @@
             requestAnimationFrame(updateTouchAnimation);
         }
         
-        // 标题矩阵解码效果
         function initGenesisEffect() {
             const title = document.querySelector('h1');
             const originalText = title.textContent;
-            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz⚡⛏️₿∞';
+            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz⚡⛏️₿∞🤖';
             
             let interval;
             let iterations = 0;
@@ -646,19 +649,16 @@
             });
         }
         
-        // 初始化
         document.addEventListener('DOMContentLoaded', function() {
             createGenesisParticles();
             updateTouchAnimation();
             initGenesisEffect();
             
-            // 中心光效脉动
             const bgGlow = document.querySelector('.touch-spark');
             setInterval(() => {
-                bgGlow.style.filter = `blur(${40 + Math.random() * 30}px)`;
+                bgGlow.style.filter = `blur(${50 + Math.random() * 40}px)`;
             }, 2500);
             
-            // 区块链心跳
             const heartbeat = document.createElement('div');
             heartbeat.style.position = 'fixed';
             heartbeat.style.bottom = '30px';
