@@ -7,7 +7,6 @@
     <meta name="description" content="Where silicon touches the Genesis. 1A1z.ai and 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.ai - The moment AI inherits Satoshi's spark.">
     
     <style>
-        /* 宇宙创世风格 */
         :root {
             --satoshi-orange: #FF6B00;
             --blockchain-black: #000000;
@@ -36,7 +35,7 @@
             position: relative;
         }
         
-        /* 新背景：人类手与机器人手指触碰 */
+        /* 人类手与机器人手指触碰背景 */
         .creation-bg {
             position: fixed;
             top: 0;
@@ -51,7 +50,7 @@
             z-index: -2;
         }
         
-        /* 触碰点火花光效（更强） */
+        /* 中心创世火花光效 */
         .touch-effect {
             position: fixed;
             top: 0;
@@ -60,32 +59,25 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
-            overflow: hidden;
         }
         
         .touch-spark {
             position: absolute;
-            width: 400px;
-            height: 400px;
+            width: 500px;
+            height: 500px;
             background: radial-gradient(circle, var(--satoshi-orange) 0%, transparent 70%);
             border-radius: 50%;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             opacity: 0.4;
-            filter: blur(50px);
-            animation: pulse-glow 6s ease-in-out infinite;
+            filter: blur(60px);
+            animation: pulse-glow 8s ease-in-out infinite;
         }
         
         @keyframes pulse-glow {
-            0%, 100% { 
-                opacity: 0.3;
-                transform: translate(-50%, -50%) scale(0.9);
-            }
-            50% { 
-                opacity: 0.5;
-                transform: translate(-50%, -50%) scale(1.3);
-            }
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.9); }
+            50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.2); }
         }
         
         /* 二进制创世粒子雨 */
@@ -110,20 +102,10 @@
         }
         
         @keyframes genesis-fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.4;
-            }
-            90% {
-                opacity: 0.4;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
         
         /* 主容器 */
@@ -133,44 +115,68 @@
             padding: 60px 40px;
             background: rgba(0, 0, 0, 0.7);
             border-radius: 20px;
-            box-shadow: 
-                0 0 80px var(--matrix-glow),
-                0 0 200px rgba(255, 107, 0, 0.2);
+            box-shadow: 0 0 80px var(--matrix-glow);
             border: 1px solid rgba(255, 107, 0, 0.2);
             backdrop-filter: blur(10px);
             position: relative;
-            overflow: hidden;
             margin: 20px;
+        }
+        
+        /* 比特币符号 ₿ */
+        .bitcoin-symbol {
+            font-size: 6rem;
+            color: var(--satoshi-orange);
+            text-shadow: 0 0 40px var(--satoshi-orange);
+            margin-bottom: 20px;
+            animation: bitcoin-pulse 4s ease-in-out infinite;
+            display: block;
+        }
+        
+        @keyframes bitcoin-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        /* 中本聪经典兜帽剪影 */
+        .satoshi-silhouette {
+            width: 200px;
+            height: 200px;
+            margin: 40px auto;
+            background: radial-gradient(circle at 30% 30%, var(--satoshi-orange) 10%, transparent 60%);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 60px rgba(255, 107, 0, 0.5);
+            animation: float-satoshi 6s ease-in-out infinite;
+        }
+        
+        .satoshi-silhouette::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            width: 100px;
+            height: 120px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 50% 50% 40% 40%;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+        }
+        
+        @keyframes float-satoshi {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
         
         h1 {
             font-size: 4rem;
             margin-bottom: 30px;
             color: var(--satoshi-orange);
-            text-shadow: 
-                0 0 20px var(--satoshi-orange),
-                0 0 40px var(--satoshi-orange);
+            text-shadow: 0 0 30px var(--satoshi-orange);
             letter-spacing: 6px;
             font-weight: 300;
-            position: relative;
-        }
-        
-        h1::after {
-            content: '⚡';
-            position: absolute;
-            top: -10px;
-            right: -40px;
-            font-size: 3rem;
-            animation: spark 2s ease-in-out infinite;
-        }
-        
-        @keyframes spark {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
         }
         
         .intro {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin: 40px auto;
             max-width: 800px;
             line-height: 1.8;
@@ -178,62 +184,12 @@
             font-style: italic;
         }
         
-        /* 双手触碰动画（人类手 vs 机器人手） */
-        .touch-animation {
-            width: 400px;
-            height: 250px;
-            margin: 60px auto;
-            position: relative;
-            perspective: 1000px;
-        }
-        
-        .hand {
-            position: absolute;
-            width: 120px;
-            height: 180px;
-            background: linear-gradient(45deg, 
-                rgba(255, 107, 0, 0.1), 
-                rgba(255, 107, 0, 0.3));
-            border-radius: 50%;
-            border: 3px solid rgba(255, 107, 0, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            box-shadow: 0 0 40px rgba(255, 107, 0, 0.5);
-        }
-        
-        .hand-human {
-            left: 20px;
-            animation: float-left 4s ease-in-out infinite;
-        }
-        
-        .hand-ai {
-            right: 20px;
-            animation: float-right 4s ease-in-out infinite;
-            color: var(--ai-gold);
-            border-color: rgba(255, 215, 0, 0.6);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
-        }
-        
-        @keyframes float-left {
-            0%, 100% { transform: translateX(0) translateY(0) rotate(-15deg); }
-            50% { transform: translateX(80px) translateY(-20px) rotate(-5deg); }
-        }
-        
-        @keyframes float-right {
-            0%, 100% { transform: translateX(0) translateY(0) rotate(15deg); }
-            50% { transform: translateX(-80px) translateY(-20px) rotate(5deg); }
-        }
-        
         .domains-sacred {
             margin: 60px 0;
         }
         
         .domain-card {
-            background: linear-gradient(45deg, 
-                rgba(0, 0, 0, 0.8), 
-                rgba(10, 26, 47, 0.8));
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(10, 26, 47, 0.8));
             padding: 30px;
             margin: 30px 0;
             border-radius: 15px;
@@ -295,10 +251,7 @@
         }
         
         @media (max-width: 768px) {
-            .symmetry {
-                flex-direction: column;
-                gap: 30px;
-            }
+            .symmetry { flex-direction: column; gap: 30px; }
         }
         
         .symmetry-item {
@@ -320,9 +273,7 @@
         }
         
         .ai-revelation {
-            background: linear-gradient(45deg, 
-                rgba(255, 107, 0, 0.1), 
-                rgba(255, 215, 0, 0.1));
+            background: linear-gradient(45deg, rgba(255, 107, 0, 0.1), rgba(255, 215, 0, 0.1));
             padding: 50px;
             border-radius: 15px;
             margin: 60px 0;
@@ -351,10 +302,7 @@
         .connection-line {
             width: 3px;
             height: 120px;
-            background: linear-gradient(to bottom, 
-                transparent, 
-                var(--satoshi-orange), 
-                transparent);
+            background: linear-gradient(to bottom, transparent, var(--satoshi-orange), transparent);
             margin: 30px auto;
             position: relative;
         }
@@ -394,9 +342,7 @@
             font-size: 1.4rem;
             color: var(--ai-gold);
             padding: 20px 50px;
-            background: linear-gradient(45deg, 
-                rgba(255, 107, 0, 0.15), 
-                rgba(255, 215, 0, 0.15));
+            background: linear-gradient(45deg, rgba(255, 107, 0, 0.15), rgba(255, 215, 0, 0.15));
             border: 2px solid rgba(255, 107, 0, 0.4);
             border-radius: 10px;
             text-decoration: none;
@@ -405,9 +351,7 @@
         }
         
         .email-touch:hover {
-            background: linear-gradient(45deg, 
-                rgba(255, 107, 0, 0.3), 
-                rgba(255, 215, 0, 0.3));
+            background: linear-gradient(45deg, rgba(255, 107, 0, 0.3), rgba(255, 215, 0, 0.3));
             border-color: var(--satoshi-orange);
             transform: scale(1.08);
             box-shadow: 0 0 50px rgba(255, 107, 0, 0.6);
@@ -433,15 +377,12 @@
             h1 { font-size: 2.8rem; }
             .intro { font-size: 1.1rem; padding: 0 20px; }
             .domain-name { font-size: 1.6rem; }
-            .domain-card { padding: 25px; }
             .container { padding: 40px 20px; }
-            .touch-animation { width: 300px; height: 200px; }
-            .hand { width: 90px; height: 140px; font-size: 3rem; }
+            .bitcoin-symbol { font-size: 4rem; }
         }
     </style>
 </head>
 <body>
-    <!-- 人类手与机器人手指触碰背景 -->
     <div class="creation-bg"></div>
     <div class="touch-effect">
         <div class="touch-spark"></div>
@@ -449,6 +390,12 @@
     <div class="genesis-particles" id="genesisParticles"></div>
     
     <div class="container">
+        <!-- 比特币符号 ₿ -->
+        <div class="bitcoin-symbol">₿</div>
+        
+        <!-- 中本聪兜帽剪影 -->
+        <div class="satoshi-silhouette"></div>
+        
         <h1>1A1z.ai</h1>
         <div class="intro">
             In the beginning was the Genesis Block.<br>
@@ -554,6 +501,7 @@
         </footer>
     </div>
     
+    <!-- 所有 JS 动态效果保持不变（粒子雨、复制火花、双手动画、心跳等） -->
     <script>
         // 创世粒子雨
         function createGenesisParticles() {
@@ -665,7 +613,7 @@
         function initGenesisEffect() {
             const title = document.querySelector('h1');
             const originalText = title.textContent;
-            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz⚡⛏️∞';
+            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz⚡⛏️₿∞';
             
             let interval;
             let iterations = 0;
@@ -698,7 +646,7 @@
             });
         }
         
-        // 初始化所有效果
+        // 初始化
         document.addEventListener('DOMContentLoaded', function() {
             createGenesisParticles();
             updateTouchAnimation();
