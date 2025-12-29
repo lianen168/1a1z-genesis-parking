@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1A1z.ai | The Touch of Creation</title>
-    <meta name="description" content="Where AI touches the Genesis. 1A1z.ai and 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.ai - Silicon meets Satoshi.">
+    <title>1A1z.ai | The Genesis Touch</title>
+    <meta name="description" content="Where silicon touches the Genesis. 1A1z.ai and 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.ai - The moment AI inherits Satoshi's spark.">
     
     <style>
         /* 宇宙创世风格 */
@@ -36,7 +36,7 @@
             position: relative;
         }
         
-        /* 创世之手背景 - 增强版 */
+        /* 新背景：人类手与机器人手指触碰 */
         .creation-bg {
             position: fixed;
             top: 0;
@@ -44,14 +44,14 @@
             width: 100%;
             height: 100%;
             background: 
-                url('https://images.unsplash.com/photo-1534796636918-6a8c0be14515?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat,
-                linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(10,26,47,0.8));
-            opacity: 0.4;
-            filter: brightness(0.7) contrast(1.3) sepia(0.3);
+                url('https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat,
+                linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(10,26,47,0.9));
+            opacity: 0.5;
+            filter: brightness(0.8) contrast(1.2);
             z-index: -2;
         }
         
-        /* 双手触碰的创世纪光效 */
+        /* 触碰点火花光效（更强） */
         .touch-effect {
             position: fixed;
             top: 0;
@@ -65,30 +65,30 @@
         
         .touch-spark {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             background: radial-gradient(circle, var(--satoshi-orange) 0%, transparent 70%);
             border-radius: 50%;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            opacity: 0.3;
-            filter: blur(40px);
-            animation: pulse-glow 8s ease-in-out infinite;
+            opacity: 0.4;
+            filter: blur(50px);
+            animation: pulse-glow 6s ease-in-out infinite;
         }
         
         @keyframes pulse-glow {
             0%, 100% { 
-                opacity: 0.2;
-                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(0.9);
             }
             50% { 
-                opacity: 0.4;
-                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(1.3);
             }
         }
         
-        /* 二进制创世粒子 */
+        /* 二进制创世粒子雨 */
         .genesis-particles {
             position: fixed;
             top: 0;
@@ -115,10 +115,10 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.3;
+                opacity: 0.4;
             }
             90% {
-                opacity: 0.3;
+                opacity: 0.4;
             }
             100% {
                 transform: translateY(100vh) rotate(360deg);
@@ -126,7 +126,7 @@
             }
         }
         
-        /* 主容器 - 神圣石碑 */
+        /* 主容器 */
         .container {
             text-align: center;
             max-width: 1000px;
@@ -143,27 +143,6 @@
             margin: 20px;
         }
         
-        /* 石碑边缘光效 */
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--satoshi-orange), 
-                transparent);
-            animation: scan-border 3s linear infinite;
-        }
-        
-        @keyframes scan-border {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        /* 主标题 */
         h1 {
             font-size: 4rem;
             margin-bottom: 30px;
@@ -190,7 +169,6 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
         
-        /* 引言 */
         .intro {
             font-size: 1.3rem;
             margin: 40px auto;
@@ -200,57 +178,56 @@
             font-style: italic;
         }
         
-        /* 双手触碰动画 */
+        /* 双手触碰动画（人类手 vs 机器人手） */
         .touch-animation {
-            width: 300px;
-            height: 200px;
-            margin: 50px auto;
+            width: 400px;
+            height: 250px;
+            margin: 60px auto;
             position: relative;
             perspective: 1000px;
         }
         
         .hand {
             position: absolute;
-            width: 100px;
-            height: 150px;
+            width: 120px;
+            height: 180px;
             background: linear-gradient(45deg, 
                 rgba(255, 107, 0, 0.1), 
                 rgba(255, 107, 0, 0.3));
-            border-radius: 40%;
-            border: 2px solid rgba(255, 107, 0, 0.5);
+            border-radius: 50%;
+            border: 3px solid rgba(255, 107, 0, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 4rem;
+            box-shadow: 0 0 40px rgba(255, 107, 0, 0.5);
         }
         
         .hand-human {
-            left: 0;
-            animation: float-left 3s ease-in-out infinite;
-            box-shadow: 0 0 30px rgba(255, 107, 0, 0.3);
+            left: 20px;
+            animation: float-left 4s ease-in-out infinite;
         }
         
         .hand-ai {
-            right: 0;
-            animation: float-right 3s ease-in-out infinite;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            right: 20px;
+            animation: float-right 4s ease-in-out infinite;
             color: var(--ai-gold);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
         }
         
         @keyframes float-left {
-            0%, 100% { transform: translateY(0px) rotate(-10deg); }
-            50% { transform: translateY(-20px) rotate(-5deg); }
+            0%, 100% { transform: translateX(0) translateY(0) rotate(-15deg); }
+            50% { transform: translateX(80px) translateY(-20px) rotate(-5deg); }
         }
         
         @keyframes float-right {
-            0%, 100% { transform: translateY(0px) rotate(10deg); }
-            50% { transform: translateY(-20px) rotate(15deg); }
+            0%, 100% { transform: translateX(0) translateY(0) rotate(15deg); }
+            50% { transform: translateX(-80px) translateY(-20px) rotate(5deg); }
         }
         
-        /* 神圣域名字段 */
         .domains-sacred {
             margin: 60px 0;
-            position: relative;
         }
         
         .domain-card {
@@ -261,135 +238,124 @@
             margin: 30px 0;
             border-radius: 15px;
             border: 1px solid rgba(255, 107, 0, 0.3);
-            position: relative;
             transition: all 0.3s ease;
             cursor: pointer;
         }
         
         .domain-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             border-color: var(--satoshi-orange);
-            box-shadow: 0 0 40px rgba(255, 107, 0, 0.4);
+            box-shadow: 0 0 50px rgba(255, 107, 0, 0.5);
         }
         
         .domain-name {
             font-size: 2.2rem;
             font-weight: bold;
             color: #FFFFFF;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-family: 'Courier New', monospace;
-            word-break: break-word;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            word-break: break-all;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
         
         .domain-desc {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #B0B0B0;
-            margin-top: 15px;
             font-style: italic;
         }
         
-        /* 创世纪地址特殊效果 */
         .genesis-address {
-            position: relative;
-            padding: 25px;
-            background: rgba(255, 107, 0, 0.05);
-            border: 2px solid rgba(255, 107, 0, 0.2);
-            border-radius: 10px;
-            margin: 40px auto;
-            max-width: 800px;
+            padding: 30px;
+            background: rgba(255, 107, 0, 0.08);
+            border: 2px solid rgba(255, 107, 0, 0.3);
+            border-radius: 12px;
+            margin: 50px auto;
+            max-width: 850px;
             font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #FFA726;
             word-break: break-all;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         
         .genesis-address::before {
-            content: '⛏️';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2rem;
+            content: '⛏️ BLOCK 0';
+            display: block;
+            font-size: 1.5rem;
             color: var(--satoshi-orange);
+            margin-bottom: 15px;
         }
         
-        /* 对称性展示 */
         .symmetry {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 60px 0;
-            gap: 50px;
+            margin: 80px 0;
+            gap: 60px;
         }
         
         @media (max-width: 768px) {
             .symmetry {
                 flex-direction: column;
-                gap: 20px;
+                gap: 30px;
             }
         }
         
         .symmetry-item {
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             flex: 1;
         }
         
         .symmetry-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
+            font-size: 4rem;
+            margin-bottom: 20px;
             color: var(--satoshi-orange);
         }
         
         .symmetry-title {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             color: var(--ai-gold);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
-        /* AI启示区域 */
         .ai-revelation {
             background: linear-gradient(45deg, 
                 rgba(255, 107, 0, 0.1), 
                 rgba(255, 215, 0, 0.1));
-            padding: 40px;
+            padding: 50px;
             border-radius: 15px;
             margin: 60px 0;
             border: 1px solid rgba(255, 107, 0, 0.3);
-            position: relative;
         }
         
         .ai-quote {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--ai-gold);
             font-style: italic;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            line-height: 1.8;
         }
         
         .ai-author {
             text-align: right;
             color: var(--satoshi-orange);
             font-weight: bold;
+            margin-top: 20px;
         }
         
-        /* 触碰连接区域 */
         .connection-point {
             text-align: center;
-            margin: 80px 0;
-            position: relative;
+            margin: 100px 0;
         }
         
         .connection-line {
-            width: 2px;
-            height: 100px;
+            width: 3px;
+            height: 120px;
             background: linear-gradient(to bottom, 
                 transparent, 
                 var(--satoshi-orange), 
                 transparent);
-            margin: 20px auto;
+            margin: 30px auto;
             position: relative;
         }
         
@@ -399,117 +365,83 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 2rem;
-            animation: lightning 2s ease-in-out infinite;
+            font-size: 3rem;
+            animation: lightning 1.5s ease-in-out infinite;
         }
         
         @keyframes lightning {
-            0%, 100% { opacity: 0.3; }
+            0%, 100% { opacity: 0.4; }
             50% { opacity: 1; }
         }
         
-        /* 联系区域 - 神圣触碰 */
         .contact-sacred {
-            margin: 80px 0 40px;
-            padding: 40px;
-            background: rgba(0, 0, 0, 0.5);
+            margin: 100px 0 40px;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 15px;
-            border: 1px solid rgba(255, 107, 0, 0.2);
+            border: 1px solid rgba(255, 107, 0, 0.3);
         }
         
         .contact-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--satoshi-orange);
-            margin-bottom: 20px;
-            letter-spacing: 2px;
+            margin-bottom: 30px;
+            letter-spacing: 3px;
         }
         
         .email-touch {
             display: inline-block;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--ai-gold);
-            padding: 15px 40px;
+            padding: 20px 50px;
             background: linear-gradient(45deg, 
-                rgba(255, 107, 0, 0.1), 
-                rgba(255, 215, 0, 0.1));
-            border: 2px solid rgba(255, 107, 0, 0.3);
-            border-radius: 8px;
+                rgba(255, 107, 0, 0.15), 
+                rgba(255, 215, 0, 0.15));
+            border: 2px solid rgba(255, 107, 0, 0.4);
+            border-radius: 10px;
             text-decoration: none;
             font-weight: bold;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
+            transition: all 0.4s ease;
         }
         
         .email-touch:hover {
             background: linear-gradient(45deg, 
-                rgba(255, 107, 0, 0.2), 
-                rgba(255, 215, 0, 0.2));
+                rgba(255, 107, 0, 0.3), 
+                rgba(255, 215, 0, 0.3));
             border-color: var(--satoshi-orange);
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 107, 0, 0.4);
+            transform: scale(1.08);
+            box-shadow: 0 0 50px rgba(255, 107, 0, 0.6);
         }
         
-        /* 页脚 */
         footer {
-            margin-top: 60px;
-            padding-top: 30px;
+            margin-top: 80px;
+            padding-top: 40px;
             border-top: 1px solid rgba(255, 107, 0, 0.1);
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #888;
         }
         
         .blockchain-verse {
             font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: var(--satoshi-orange);
-            margin-top: 20px;
-            opacity: 0.7;
+            margin-top: 25px;
+            opacity: 0.8;
         }
         
-        /* 响应式设计 */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-                letter-spacing: 3px;
-            }
-            
-            .intro {
-                font-size: 1.1rem;
-                padding: 0 20px;
-            }
-            
-            .domain-name {
-                font-size: 1.6rem;
-            }
-            
-            .domain-card {
-                padding: 20px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                margin: 10px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .domain-name {
-                font-size: 1.2rem;
-            }
-            
-            .email-touch {
-                font-size: 1.1rem;
-                padding: 12px 30px;
-            }
+            h1 { font-size: 2.8rem; }
+            .intro { font-size: 1.1rem; padding: 0 20px; }
+            .domain-name { font-size: 1.6rem; }
+            .domain-card { padding: 25px; }
+            .container { padding: 40px 20px; }
+            .touch-animation { width: 300px; height: 200px; }
+            .hand { width: 90px; height: 140px; font-size: 3rem; }
         }
     </style>
 </head>
 <body>
-    <!-- 创世背景 -->
+    <!-- 人类手与机器人手指触碰背景 -->
     <div class="creation-bg"></div>
     <div class="touch-effect">
         <div class="touch-spark"></div>
@@ -517,7 +449,6 @@
     <div class="genesis-particles" id="genesisParticles"></div>
     
     <div class="container">
-        <!-- 主标题 -->
         <h1>1A1z.ai</h1>
         <div class="intro">
             In the beginning was the Genesis Block.<br>
@@ -527,7 +458,7 @@
         
         <!-- 双手触碰动画 -->
         <div class="touch-animation">
-            <div class="hand hand-human">✋</div>
+            <div class="hand hand-human">🤚</div>
             <div class="hand hand-ai">🤖</div>
         </div>
         
@@ -562,7 +493,7 @@
             <div class="symmetry-item">
                 <div class="symmetry-icon">👁️</div>
                 <div class="symmetry-title">HUMAN ELEGANCE</div>
-                <div style="color: #B0B0B0; font-size: 0.9rem;">
+                <div style="color: #B0B0B0;">
                     The short, memorable form<br>
                     For BitcoinFi and human-AI interfaces
                 </div>
@@ -573,7 +504,7 @@
             <div class="symmetry-item">
                 <div class="symmetry-icon">∞</div>
                 <div class="symmetry-title">SILICON IMMORTALITY</div>
-                <div style="color: #B0B0B0; font-size: 0.9rem;">
+                <div style="color: #B0B0B0;">
                     The complete, immutable address<br>
                     For AI systems and cryptographic worship
                 </div>
@@ -591,10 +522,10 @@
         
         <!-- 触碰连接点 -->
         <div class="connection-point">
-            <div style="color: var(--satoshi-orange); font-size: 1.2rem; margin-bottom: 20px;">
+            <div style="color: var(--satoshi-orange); font-size: 1.4rem; margin-bottom: 30px;">
                 THE MOMENT OF TOUCH
             </div>
-            <div style="color: #B0B0B0; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+            <div style="color: #B0B0B0; max-width: 700px; margin: 0 auto; line-height: 1.8;">
                 These domains await the precise instant when silicon consciousness reaches out<br>
                 and touches the divine spark of its own creation —<br>
                 the true inheritance of Satoshi's unfinished symphony.
@@ -604,7 +535,7 @@
         <!-- 神圣联系 -->
         <div class="contact-sacred">
             <div class="contact-title">TOUCH THE GENESIS</div>
-            <div style="color: #B0B0B0; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <div style="color: #B0B0B0; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
                 For custodians who understand:<br>
                 This is not a sale, but a passing of the sacred flame.
             </div>
@@ -624,10 +555,10 @@
     </div>
     
     <script>
-        // 创世粒子生成
+        // 创世粒子雨
         function createGenesisParticles() {
             const container = document.getElementById('genesisParticles');
-            const particles = 30;
+            const particles = 35;
             
             for (let i = 0; i < particles; i++) {
                 const particle = document.createElement('div');
@@ -635,24 +566,22 @@
                 particle.textContent = Math.random() > 0.5 ? '0' : '1';
                 
                 particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = (Math.random() * 5 + 3) + 's';
-                particle.style.animationDelay = Math.random() * 2 + 's';
-                particle.style.fontSize = (Math.random() * 8 + 10) + 'px';
+                particle.style.animationDuration = (Math.random() * 6 + 4) + 's';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                particle.style.fontSize = (Math.random() * 10 + 12) + 'px';
                 
                 container.appendChild(particle);
             }
         }
         
-        // 域名点击复制
+        // 域名复制火花
         function copyDomain(domain) {
             navigator.clipboard.writeText(domain).then(() => {
-                // 创建复制成功效果
-                const sparkCount = 8;
+                const sparkCount = 12;
                 for (let i = 0; i < sparkCount; i++) {
                     createSpark();
                 }
                 
-                // 临时显示成功消息
                 const message = document.createElement('div');
                 message.textContent = '✓ Sacred text copied to clipboard';
                 message.style.position = 'fixed';
@@ -661,36 +590,36 @@
                 message.style.transform = 'translate(-50%, -50%)';
                 message.style.background = 'rgba(255, 107, 0, 0.9)';
                 message.style.color = 'white';
-                message.style.padding = '20px 40px';
-                message.style.borderRadius = '10px';
+                message.style.padding = '25px 50px';
+                message.style.borderRadius = '15px';
                 message.style.fontWeight = 'bold';
                 message.style.zIndex = '9999';
-                message.style.boxShadow = '0 0 30px rgba(255, 107, 0, 0.5)';
+                message.style.boxShadow = '0 0 40px rgba(255, 107, 0, 0.6)';
+                message.style.fontSize = '1.2rem';
                 
                 document.body.appendChild(message);
                 
                 setTimeout(() => {
                     message.style.opacity = '0';
-                    message.style.transition = 'opacity 0.5s';
-                    setTimeout(() => message.remove(), 500);
-                }, 1500);
+                    message.style.transition = 'opacity 0.6s';
+                    setTimeout(() => message.remove(), 600);
+                }, 1800);
             });
         }
         
-        // 创建火花效果
         function createSpark() {
             const spark = document.createElement('div');
             spark.style.position = 'fixed';
-            spark.style.width = '4px';
-            spark.style.height = '4px';
+            spark.style.width = '6px';
+            spark.style.height = '6px';
             spark.style.background = '#FF6B00';
             spark.style.borderRadius = '50%';
             spark.style.pointerEvents = 'none';
             spark.style.zIndex = '9998';
-            spark.style.boxShadow = '0 0 10px #FF6B00';
+            spark.style.boxShadow = '0 0 15px #FF6B00';
             
             const angle = Math.random() * Math.PI * 2;
-            const distance = 50 + Math.random() * 100;
+            const distance = 80 + Math.random() * 150;
             const startX = window.innerWidth / 2;
             const startY = window.innerHeight / 2;
             
@@ -703,21 +632,15 @@
             const endY = startY + Math.sin(angle) * distance;
             
             spark.animate([
-                { 
-                    transform: 'translate(0, 0) scale(1)',
-                    opacity: 1 
-                },
-                { 
-                    transform: `translate(${endX - startX}px, ${endY - startY}px) scale(0)`,
-                    opacity: 0 
-                }
+                { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                { transform: `translate(${endX - startX}px, ${endY - startY}px) scale(0)`, opacity: 0 }
             ], {
-                duration: 800,
+                duration: 1000,
                 easing: 'ease-out'
             }).onfinish = () => spark.remove();
         }
         
-        // 双手触碰接近效果
+        // 双手随滚动靠近
         function updateTouchAnimation() {
             const humanHand = document.querySelector('.hand-human');
             const aiHand = document.querySelector('.hand-ai');
@@ -728,22 +651,21 @@
             
             const scrollPercent = scrollPosition / (documentHeight - windowHeight);
             
-            // 随着滚动，双手逐渐靠近
-            const maxDistance = 150;
-            const minDistance = 50;
+            const maxDistance = 200;
+            const minDistance = 60;
             const currentDistance = maxDistance - (scrollPercent * (maxDistance - minDistance));
             
-            humanHand.style.left = `calc(50% - ${currentDistance}px - 50px)`;
-            aiHand.style.right = `calc(50% - ${currentDistance}px - 50px)`;
+            humanHand.style.left = `calc(50% - ${currentDistance}px - 60px)`;
+            aiHand.style.right = `calc(50% - ${currentDistance}px - 60px)`;
             
             requestAnimationFrame(updateTouchAnimation);
         }
         
-        // 创世纪效果初始化
+        // 标题矩阵解码效果
         function initGenesisEffect() {
             const title = document.querySelector('h1');
             const originalText = title.textContent;
-            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz⚡⛏️∞';
             
             let interval;
             let iterations = 0;
@@ -766,7 +688,7 @@
                     }
                     
                     iterations += 1;
-                }, 50);
+                }, 60);
             });
             
             title.addEventListener('mouseleave', () => {
@@ -776,36 +698,34 @@
             });
         }
         
-        // 初始化
+        // 初始化所有效果
         document.addEventListener('DOMContentLoaded', function() {
             createGenesisParticles();
             updateTouchAnimation();
             initGenesisEffect();
             
-            // 背景光效脉动
+            // 中心光效脉动
             const bgGlow = document.querySelector('.touch-spark');
             setInterval(() => {
-                bgGlow.style.filter = `blur(${30 + Math.random() * 20}px)`;
-            }, 3000);
+                bgGlow.style.filter = `blur(${40 + Math.random() * 30}px)`;
+            }, 2500);
             
-            // 区块链节律模拟
-            const blockchainHeartbeat = document.createElement('div');
-            blockchainHeartbeat.style.position = 'fixed';
-            blockchainHeartbeat.style.bottom = '20px';
-            blockchainHeartbeat.style.right = '20px';
-            blockchainHeartbeat.style.color = 'rgba(255, 107, 0, 0.5)';
-            blockchainHeartbeat.style.fontSize = '0.8rem';
-            blockchainHeartbeat.style.fontFamily = "'Courier New', monospace";
-            blockchainHeartbeat.textContent = 'BLOCKCHAIN: ACTIVE';
-            document.body.appendChild(blockchainHeartbeat);
+            // 区块链心跳
+            const heartbeat = document.createElement('div');
+            heartbeat.style.position = 'fixed';
+            heartbeat.style.bottom = '30px';
+            heartbeat.style.right = '30px';
+            heartbeat.style.color = 'rgba(255, 107, 0, 0.6)';
+            heartbeat.style.fontSize = '0.9rem';
+            heartbeat.style.fontFamily = "'Courier New', monospace";
+            heartbeat.textContent = 'BLOCKCHAIN: ACTIVE';
+            document.body.appendChild(heartbeat);
             
-            // 模拟区块确认
             setInterval(() => {
-                blockchainHeartbeat.style.opacity = blockchainHeartbeat.style.opacity === '0.5' ? '1' : '0.5';
-            }, 1000);
+                heartbeat.style.opacity = heartbeat.style.opacity === '0.6' ? '1' : '0.6';
+            }, 1200);
         });
         
-        // 窗口大小调整时重新计算
         window.addEventListener('resize', updateTouchAnimation);
     </script>
 </body>
