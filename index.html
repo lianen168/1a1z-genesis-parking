@@ -711,7 +711,6 @@
         
         .domain-code {
             font-family: 'Courier New', monospace;
-            font-size: 2rem;
             font-weight: bold;
             color: #FFFFFF;
             margin-bottom: 20px;
@@ -721,18 +720,25 @@
             position: relative;
         }
         
-        @media (max-width: 768px) {
-            .domain-code {
-                font-size: 1.5rem;
-            }
-        }
-        
         .domain-shrine.bitcoin .domain-code {
+            font-size: 2rem;
             color: var(--bitcoin-gold);
         }
         
+        /* 完整域名 - 字体小一点，防止换行 */
         .domain-shrine.ai .domain-code {
+            font-size: 1.6rem; /* 减小字体大小 */
             color: var(--ai-blue);
+        }
+        
+        @media (max-width: 768px) {
+            .domain-shrine.bitcoin .domain-code {
+                font-size: 1.5rem;
+            }
+            
+            .domain-shrine.ai .domain-code {
+                font-size: 1.2rem; /* 移动端更小一点 */
+            }
         }
         
         .domain-purpose {
@@ -1024,6 +1030,17 @@
             transition: all 0.3s ease;
         }
         
+        /* 主标题中的1A1z.ai部分效果 */
+        #main-title .part-1A1z {
+            color: var(--bitcoin-gold);
+            text-shadow: 0 0 20px rgba(247, 147, 26, 0.5);
+        }
+        
+        #main-title .part-ai {
+            color: var(--ai-blue);
+            text-shadow: 0 0 20px rgba(102, 204, 255, 0.5);
+        }
+        
         /* .ai 后缀钻石闪光效果 */
         .ai-diamond {
             position: relative;
@@ -1114,16 +1131,41 @@
             }
         }
         
-        /* 全域名渐变橙色效果 */
-        .domain-gradient .char-glow {
-            background: linear-gradient(90deg, 
-                var(--bitcoin-orange) 0%,
-                var(--bitcoin-gold) 50%,
-                var(--bitcoin-orange) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        /* 完整域名渐变效果 - 蓝色到橙色渐变 */
+        .full-domain-gradient {
             display: inline-block;
+        }
+        
+        .full-domain-gradient .char-glow {
+            display: inline-block;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        /* 比特币价格显示样式 */
+        #bitcoin-price {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            color: rgba(247, 147, 26, 0.8);
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: 1px solid rgba(247, 147, 26, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            #bitcoin-price {
+                bottom: 10px;
+                left: 10px;
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
         }
     </style>
 </head>
@@ -1148,6 +1190,9 @@
     
     <!-- 二进制粒子雨 -->
     <div class="genesis-particles" id="genesisParticles"></div>
+    
+    <!-- 比特币实时价格显示 -->
+    <div id="bitcoin-price">₿ BTC: $--,--.--</div>
     
     <div class="container">
         <!-- 创世区块标题 -->
@@ -1217,7 +1262,7 @@
             
             <div class="domain-shrine ai" id="domain-full">
                 <div class="shrine-icon">⎙</div>
-                <div class="domain-code domain-gradient" id="full-domain">
+                <div class="domain-code full-domain-gradient" id="full-domain">
                     <!-- 字符将在这里通过JavaScript动态生成 -->
                 </div>
                 <div class="domain-purpose">
@@ -1350,11 +1395,20 @@
                 
                 parent.addEventListener('mouseleave', function() {
                     if (element.classList.contains('part-1A1z')) {
-                        element.style.color = '';
+                        // 恢复原来的颜色
+                        if (parent.id === 'main-title') {
+                            element.style.color = 'var(--bitcoin-gold)';
+                        } else {
+                            element.style.color = '';
+                        }
                         element.style.textShadow = '';
                         element.style.transform = '';
                     } else if (element.classList.contains('ai-diamond')) {
                         element.classList.remove('ai-glowing');
+                        // 恢复原来的颜色
+                        if (parent.id === 'main-title') {
+                            element.style.color = 'var(--ai-blue)';
+                        }
                     }
                 });
                 
@@ -1365,51 +1419,93 @@
             });
         }
         
-        // ===================== 新增效果3：完整域名字符渐变效果 =====================
+        // ===================== 新增效果3：完整域名字符渐变效果（蓝色到橙色） =====================
         function initFullDomainGradientEffect() {
             const domainElement = document.getElementById('full-domain');
             if (!domainElement) return;
             
             const fullDomain = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.ai';
-            const domainChars = fullDomain.split('');
+            const addressPart = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
+            const suffixPart = '.ai';
+            const addressChars = addressPart.split('');
             
             // 创建渐变字符
             domainElement.innerHTML = '';
-            domainChars.forEach((char, index) => {
+            
+            // 生成地址部分的渐变字符（蓝色到橙色）
+            addressChars.forEach((char, index) => {
                 const span = document.createElement('span');
                 span.textContent = char;
                 span.className = 'char-glow';
                 
-                // 设置渐变延迟，从第一个字符到最后一个字符
-                const delay = (index / (domainChars.length - 1)) * 100;
-                span.style.animationDelay = `${delay * 0.05}s`;
+                // 计算渐变位置：从蓝色（0%）到橙色（100%）
+                const percentage = (index / (addressChars.length - 1)) * 100;
+                const blueColor = '66, 204, 255'; // RGB for #66CCFF
+                const orangeColor = '247, 147, 26'; // RGB for #F7931A
                 
-                // 对于.ai后缀，添加特殊类
-                if (char === '.' || (char === 'a' && domainChars[index-1] === '.') || 
-                    (char === 'i' && domainChars[index-1] === 'a' && domainChars[index-2] === '.')) {
-                    span.classList.add('ai-char');
-                }
+                // 计算中间颜色
+                const r = Math.round(66 + (247 - 66) * (percentage / 100));
+                const g = Math.round(204 + (147 - 204) * (percentage / 100));
+                const b = Math.round(255 + (26 - 255) * (percentage / 100));
+                
+                span.style.background = `linear-gradient(90deg, rgb(${blueColor}), rgb(${orangeColor}))`;
+                span.style.backgroundClip = 'text';
+                span.style.webkitBackgroundClip = 'text';
+                span.style.color = 'transparent';
+                span.style.textShadow = `0 0 5px rgba(${r}, ${g}, ${b}, 0.5)`;
                 
                 domainElement.appendChild(span);
             });
+            
+            // 添加.ai后缀
+            const aiSpan = document.createElement('span');
+            aiSpan.textContent = suffixPart;
+            aiSpan.className = 'ai-diamond';
+            aiSpan.style.color = 'var(--ai-blue)';
+            aiSpan.style.textShadow = '0 0 10px var(--ai-blue)';
+            domainElement.appendChild(aiSpan);
             
             // 为整个域名添加悬停效果
             const domainCard = document.getElementById('domain-full');
             
             // 桌面端鼠标悬停效果
             domainCard.addEventListener('mouseenter', function() {
-                const aiChars = domainElement.querySelectorAll('.ai-char');
-                aiChars.forEach(char => {
-                    char.style.color = '#FFFFFF';
-                    char.style.textShadow = '0 0 10px var(--ai-blue), 0 0 20px var(--ai-blue)';
+                // .ai部分钻石闪光
+                const aiElement = domainElement.querySelector('.ai-diamond');
+                if (aiElement) {
+                    aiElement.classList.add('ai-glowing');
+                }
+                
+                // 增强所有字符的光晕
+                const chars = domainElement.querySelectorAll('.char-glow');
+                chars.forEach(char => {
+                    const currentColor = char.style.textShadow.match(/\d+/g);
+                    if (currentColor && currentColor.length >= 3) {
+                        const r = parseInt(currentColor[0]);
+                        const g = parseInt(currentColor[1]);
+                        const b = parseInt(currentColor[2]);
+                        char.style.textShadow = `0 0 15px rgba(${r}, ${g}, ${b}, 0.8), 0 0 30px rgba(${r}, ${g}, ${b}, 0.4)`;
+                    }
                 });
             });
             
             domainCard.addEventListener('mouseleave', function() {
-                const aiChars = domainElement.querySelectorAll('.ai-char');
-                aiChars.forEach(char => {
-                    char.style.color = '';
-                    char.style.textShadow = '';
+                // 移除.ai部分钻石闪光
+                const aiElement = domainElement.querySelector('.ai-diamond');
+                if (aiElement) {
+                    aiElement.classList.remove('ai-glowing');
+                }
+                
+                // 恢复字符光晕
+                const chars = domainElement.querySelectorAll('.char-glow');
+                chars.forEach((char, index) => {
+                    const percentage = (index / (addressChars.length - 1)) * 100;
+                    const blueColor = '66, 204, 255';
+                    const orangeColor = '247, 147, 26';
+                    const r = Math.round(66 + (247 - 66) * (percentage / 100));
+                    const g = Math.round(204 + (147 - 204) * (percentage / 100));
+                    const b = Math.round(255 + (26 - 255) * (percentage / 100));
+                    char.style.textShadow = `0 0 5px rgba(${r}, ${g}, ${b}, 0.5)`;
                 });
             });
             
@@ -1447,6 +1543,98 @@
                     }, 500);
                 });
             });
+        }
+        
+        // ===================== 比特币实时价格功能 =====================
+        function initBitcoinPrice() {
+            const priceElement = document.getElementById('bitcoin-price');
+            if (!priceElement) return;
+            
+            // 获取比特币实时价格
+            function fetchBitcoinPrice() {
+                // 使用多个API备用
+                const apis = [
+                    'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd',
+                    'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT',
+                    'https://api.coincap.io/v2/assets/bitcoin'
+                ];
+                
+                // 尝试第一个API
+                fetch(apis[0])
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.bitcoin && data.bitcoin.usd) {
+                            const price = data.bitcoin.usd;
+                            updatePriceDisplay(price);
+                        } else {
+                            // 如果第一个API失败，尝试第二个
+                            fetch(apis[1])
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.price) {
+                                        const price = parseFloat(data.price);
+                                        updatePriceDisplay(price);
+                                    } else {
+                                        // 如果第二个API失败，尝试第三个
+                                        fetch(apis[2])
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                if (data.data && data.data.priceUsd) {
+                                                    const price = parseFloat(data.data.priceUsd);
+                                                    updatePriceDisplay(price);
+                                                } else {
+                                                    // 如果所有API都失败，使用模拟价格
+                                                    showSimulatedPrice();
+                                                }
+                                            })
+                                            .catch(() => showSimulatedPrice());
+                                    }
+                                })
+                                .catch(() => showSimulatedPrice());
+                        }
+                    })
+                    .catch(() => showSimulatedPrice());
+            }
+            
+            function updatePriceDisplay(price) {
+                const formattedPrice = new Intl.NumberFormat('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(price);
+                
+                priceElement.textContent = `₿ BTC: $${formattedPrice}`;
+                priceElement.style.color = 'rgba(247, 147, 26, 0.9)';
+                
+                // 添加价格更新动画
+                priceElement.classList.add('touch-feedback');
+                setTimeout(() => {
+                    priceElement.classList.remove('touch-feedback');
+                }, 300);
+            }
+            
+            function showSimulatedPrice() {
+                // 模拟当前价格 - 基于当前市场情况（约8.7万美金）
+                const basePrice = 87000;
+                const change = (Math.random() - 0.5) * 1000; // 小范围波动
+                const currentPrice = (basePrice + change).toFixed(2);
+                priceElement.textContent = `₿ BTC: $${currentPrice}`;
+                priceElement.style.color = change >= 0 ? 
+                    'rgba(0, 255, 0, 0.8)' : 'rgba(255, 0, 0, 0.8)';
+            }
+            
+            // 首次获取价格
+            fetchBitcoinPrice();
+            
+            // 每30秒更新一次价格
+            setInterval(fetchBitcoinPrice, 30000);
+            
+            // 点击价格元素查看更多信息
+            priceElement.addEventListener('click', function() {
+                window.open('https://www.coingecko.com/en/coins/bitcoin', '_blank');
+            });
+            
+            // 移动端触摸效果
+            addTouchFeedback(priceElement);
         }
         
         // ===================== 原有的悬停效果（移动端适配） =====================
@@ -1935,6 +2123,9 @@
             // 首先启动区块高度演进动画
             updateRealBlockHeight();
             
+            // 初始化比特币实时价格
+            initBitcoinPrice();
+            
             // 初始化所有新增效果
             initSatoshiAvatarEffect();
             init1A1zAiHighlightEffect();
@@ -1964,37 +2155,22 @@
             domainCards.forEach(card => {
                 card.addEventListener('click', function() {
                     const domainCode = this.querySelector('.domain-code');
-                    const domainText = domainCode ? domainCode.textContent : '';
+                    let domainText = '';
+                    
+                    if (domainCode.id === 'full-domain') {
+                        // 对于完整域名，获取所有文本内容
+                        const spans = domainCode.querySelectorAll('span');
+                        domainText = Array.from(spans).map(span => span.textContent).join('');
+                        domainText += '.ai'; // 添加.ai后缀
+                    } else {
+                        domainText = domainCode ? domainCode.textContent : '';
+                    }
+                    
                     if (domainText) {
                         copyToClipboard(domainText.trim());
                     }
                 });
             });
-            
-            // 比特币价格模拟
-            const priceTicker = document.createElement('div');
-            priceTicker.style.position = 'fixed';
-            priceTicker.style.bottom = isMobile ? '10px' : '15px';
-            priceTicker.style.left = isMobile ? '10px' : '15px';
-            priceTicker.style.color = 'rgba(247, 147, 26, 0.8)';
-            priceTicker.style.fontSize = isMobile ? '0.8rem' : '0.9rem';
-            priceTicker.style.fontFamily = "'Courier New', monospace";
-            priceTicker.style.background = 'rgba(0, 0, 0, 0.6)';
-            priceTicker.style.padding = isMobile ? '6px 10px' : '8px 15px';
-            priceTicker.style.borderRadius = '6px';
-            priceTicker.style.border = '1px solid rgba(247, 147, 26, 0.3)';
-            priceTicker.style.zIndex = '1000';
-            priceTicker.textContent = '₿ BTC: $65,432.10';
-            document.body.appendChild(priceTicker);
-            
-            setInterval(() => {
-                const basePrice = 65000;
-                const change = (Math.random() - 0.5) * 800;
-                const currentPrice = (basePrice + change).toFixed(2);
-                priceTicker.textContent = `₿ BTC: $${currentPrice}`;
-                priceTicker.style.color = change >= 0 ? 
-                    'rgba(0, 255, 0, 0.8)' : 'rgba(255, 0, 0, 0.8)';
-            }, 4000);
             
             // 挖矿指示器
             const miningIndicator = document.createElement('div');
