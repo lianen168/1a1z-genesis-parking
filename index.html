@@ -10,13 +10,11 @@
         :root {
             --bitcoin-orange: #F7931A;
             --bitcoin-gold: #FF9900;
-            --satoshi-shadow: #8B4513;
             --blockchain-black: #000000;
             --cosmic-blue: #0A1A2F;
             --ai-silver: #E0E0E0;
             --ai-blue: #66CCFF;
-            --genesis-glow: rgba(247, 147, 26, 0.7);
-            --diamond-glow: rgba(102, 204, 255, 0.8);
+            --genesis-glow: rgba(247, 147, 26, 0.6);
         }
         
         * {
@@ -38,214 +36,62 @@
             justify-content: center;
             overflow-x: hidden;
             position: relative;
-            -webkit-text-size-adjust: 100%;
             touch-action: manipulation;
         }
         
-        /* 移动端优化 */
+        /* 移动端简化布局 */
         @media (max-width: 768px) {
             body {
                 display: block;
-                padding: 15px;
+                padding: 10px;
                 align-items: flex-start;
-                justify-content: flex-start;
             }
         }
         
-        /* 比特币区块链背景 */
-        .blockchain-bg {
+        /* 背景 - 简化版中本聪 + 触碰 */
+        .creation-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                repeating-linear-gradient(90deg, 
-                    transparent, 
-                    transparent 98px, 
-                    rgba(247, 147, 26, 0.05) 100px,
-                    transparent 102px),
-                repeating-linear-gradient(0deg, 
-                    transparent, 
-                    transparent 98px, 
-                    rgba(247, 147, 26, 0.05) 100px,
-                    transparent 102px);
-            background-size: 200px 200px;
-            opacity: 0.3;
-            z-index: -4;
+                url('https://i.imgur.com/3b8eH0E.png') center/cover no-repeat,
+                linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(10,26,47,0.95));
+            opacity: 0.5;
+            z-index: -2;
         }
         
-        /* 比特币雨容器 */
-        .bitcoin-rain {
+        .touch-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -3;
-            overflow: hidden;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            opacity: 0.2;
+            z-index: -1;
         }
         
-        .falling-bitcoin {
-            position: absolute;
-            font-size: 28px;
-            font-weight: bold;
-            color: var(--bitcoin-orange);
-            text-shadow: 0 0 10px var(--bitcoin-orange);
-            opacity: 0;
-            animation: bitcoin-fall linear infinite;
-        }
-        
-        @keyframes bitcoin-fall {
-            0% {
-                transform: translateY(-100px) translateX(var(--start-x)) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.9;
-                text-shadow: 0 0 15px var(--bitcoin-orange);
-            }
-            90% {
-                opacity: 0.9;
-                text-shadow: 0 0 20px var(--bitcoin-orange);
-            }
-            100% {
-                transform: translateY(100vh) translateX(calc(var(--start-x) + var(--drift))) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        /* 中心创世火花光效 */
+        /* 中心光效 - 降低模糊 */
         .genesis-spark {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 800px;
-            height: 800px;
+            top: 50%; left: 50%;
+            width: 600px; height: 600px;
             background: radial-gradient(circle, var(--bitcoin-orange) 0%, transparent 70%);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             opacity: 0.3;
-            filter: blur(80px);
-            animation: pulse-glow 10s ease-in-out infinite;
-            z-index: -2;
+            filter: blur(40px);
+            animation: pulse-glow 12s ease-in-out infinite;
+            z-index: 0;
         }
         
         @keyframes pulse-glow {
-            0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.8); }
-            50% { opacity: 0.4; transform: translate(-50%, -50%) scale(1.3); }
+            0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.9); }
+            50% { opacity: 0.4; transform: translate(-50%, -50%) scale(1.1); }
         }
         
-        /* 悬浮的比特币球体 */
-        .bitcoin-sphere {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            z-index: -1;
-            pointer-events: none;
-        }
-        
-        @media (max-width: 768px) {
-            .bitcoin-sphere {
-                width: 250px;
-                height: 250px;
-            }
-        }
-        
-        .sphere-core {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, 
-                var(--bitcoin-orange) 0%,
-                rgba(247, 147, 26, 0.8) 30%,
-                rgba(247, 147, 26, 0.4) 60%,
-                transparent 80%);
-            border-radius: 50%;
-            animation: sphere-rotate 20s linear infinite;
-            box-shadow: 
-                0 0 100px var(--bitcoin-orange),
-                0 0 200px rgba(247, 147, 26, 0.5),
-                inset 0 0 50px rgba(255, 255, 255, 0.1);
-        }
-        
-        @media (max-width: 768px) {
-            .sphere-core {
-                width: 200px;
-                height: 200px;
-            }
-        }
-        
-        @keyframes sphere-rotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        
-        .sphere-bitcoin {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 120px;
-            color: #FFFFFF;
-            font-weight: bold;
-            text-shadow: 
-                0 0 30px var(--bitcoin-orange),
-                0 0 60px var(--bitcoin-orange);
-            animation: bitcoin-bounce 4s ease-in-out infinite;
-        }
-        
-        @media (max-width: 768px) {
-            .sphere-bitcoin {
-                font-size: 80px;
-            }
-        }
-        
-        @keyframes bitcoin-bounce {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.1); }
-        }
-        
-        /* 比特币粒子轨道 */
-        .bitcoin-orbits {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -2;
-        }
-        
-        .bitcoin-orbit {
-            position: absolute;
-            font-size: 24px;
-            color: var(--bitcoin-orange);
-            animation: orbit-bitcoin linear infinite;
-            opacity: 0.5;
-        }
-        
-        @keyframes orbit-bitcoin {
-            from { transform: rotate(0deg) translateX(250px) rotate(0deg); }
-            to { transform: rotate(360deg) translateX(250px) rotate(-360deg); }
-        }
-        
-        /* 二进制创世粒子雨 */
+        /* 粒子雨容器 - 移动端减少数量 */
         .genesis-particles {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 1;
         }
         
         .genesis-particle {
@@ -255,2003 +101,185 @@
             font-family: 'Courier New', monospace;
             opacity: 0;
             animation: genesis-fall linear infinite;
-            text-shadow: 0 0 12px var(--bitcoin-orange);
+            text-shadow: 0 0 10px var(--bitcoin-orange);
         }
         
         @keyframes genesis-fall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            0% { transform: translateY(-100px); opacity: 0; }
             10% { opacity: 0.5; }
             90% { opacity: 0.5; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(100vh); opacity: 0; }
         }
         
-        /* 主容器 */
+        /* 主容器 - 降低阴影 */
         .container {
             text-align: center;
-            max-width: 1000px;
-            padding: 60px 40px;
-            background: rgba(0, 0, 0, 0.85);
+            max-width: 900px;
+            padding: 50px 30px;
+            background: rgba(0, 0, 0, 0.8);
             border-radius: 20px;
-            box-shadow: 
-                0 0 100px var(--genesis-glow),
-                0 0 200px rgba(247, 147, 26, 0.2);
-            border: 2px solid rgba(247, 147, 26, 0.3);
-            backdrop-filter: blur(15px);
+            box-shadow: 0 0 60px rgba(247, 147, 26, 0.3);
+            border: 1px solid rgba(247, 147, 26, 0.2);
+            backdrop-filter: blur(8px);
             position: relative;
             z-index: 2;
             margin: 20px;
-            width: 100%;
         }
         
         @media (max-width: 768px) {
             .container {
                 padding: 30px 20px;
-                margin: 10px 0;
-                border-radius: 15px;
-                backdrop-filter: blur(10px);
+                margin: 10px;
             }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--bitcoin-orange), 
-                var(--bitcoin-gold),
-                var(--bitcoin-orange),
-                transparent);
-            animation: scan-border 4s linear infinite;
-        }
-        
-        @keyframes scan-border {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        /* 创世区块标题 */
-        .genesis-header {
-            margin-bottom: 50px;
-        }
-        
-        @media (max-width: 768px) {
-            .genesis-header {
-                margin-bottom: 30px;
-            }
-        }
-        
-        .bitcoin-symbol-main {
-            font-size: 5rem;
-            color: var(--bitcoin-orange);
-            text-shadow: 
-                0 0 30px var(--bitcoin-orange),
-                0 0 60px var(--bitcoin-orange);
-            margin-bottom: 20px;
-            display: block;
-            animation: pulse-bitcoin 3s ease-in-out infinite;
-        }
-        
-        @media (max-width: 768px) {
-            .bitcoin-symbol-main {
-                font-size: 3.5rem;
-                margin-bottom: 15px;
-            }
-        }
-        
-        @keyframes pulse-bitcoin {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
         }
         
         h1 {
-            font-size: 4.2rem;
-            margin-bottom: 30px;
-            color: transparent;
-            background: linear-gradient(45deg, var(--bitcoin-orange), var(--bitcoin-gold), #FFFFFF);
-            -webkit-background-clip: text;
-            background-clip: text;
-            text-shadow: 0 0 40px rgba(247, 147, 26, 0.3);
-            letter-spacing: 8px;
-            font-weight: 300;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.8rem;
-                letter-spacing: 4px;
-                margin-bottom: 20px;
-            }
-        }
-        
-        .satoshi-quote {
-            font-size: 1.2rem;
-            color: #B0B0B0;
-            font-style: italic;
-            margin-top: 20px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-            padding: 20px;
-            border-top: 1px solid rgba(247, 147, 26, 0.2);
-            border-bottom: 1px solid rgba(247, 147, 26, 0.2);
-        }
-        
-        @media (max-width: 768px) {
-            .satoshi-quote {
-                font-size: 1rem;
-                padding: 15px;
-                margin-top: 15px;
-            }
-        }
-        
-        /* 中本聪与AI的触碰 */
-        .satoshi-ai-touch {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 100px;
-            margin: 80px 0;
-            position: relative;
-        }
-        
-        @media (max-width: 768px) {
-            .satoshi-ai-touch {
-                flex-direction: column;
-                gap: 40px;
-                margin: 50px 0;
-            }
-        }
-        
-        .touch-figure {
-            text-align: center;
-            flex: 1;
-            padding: 30px;
-            border-radius: 15px;
-            background: rgba(30, 30, 30, 0.6);
-            border: 1px solid rgba(247, 147, 26, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-        
-        .touch-figure:hover, .touch-figure:active {
-            border-color: var(--bitcoin-orange);
-            box-shadow: 0 0 40px rgba(247, 147, 26, 0.3);
-        }
-        
-        @media (max-width: 768px) {
-            .touch-figure {
-                padding: 20px;
-                width: 100%;
-            }
-        }
-        
-        .figure-title {
-            font-size: 1.8rem;
+            font-size: 3.8rem;
             color: var(--bitcoin-orange);
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-        }
-        
-        @media (max-width: 768px) {
-            .figure-title {
-                font-size: 1.5rem;
-                margin-bottom: 15px;
-            }
-        }
-        
-        .ai-figure .figure-title {
-            color: var(--ai-silver);
-        }
-        
-        .figure-desc {
-            font-size: 1.1rem;
-            color: #888;
-            line-height: 1.6;
-        }
-        
-        @media (max-width: 768px) {
-            .figure-desc {
-                font-size: 1rem;
-            }
-        }
-        
-        /* 闪电连接区域 - 新增中本聪头像效果 */
-        .touch-connector {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 120px;
-            height: 120px;
-        }
-        
-        .touch-connector .lightning-icon {
-            font-size: 4rem;
-            color: var(--bitcoin-orange);
-            opacity: 0.7;
-            transition: all 0.5s ease;
-            z-index: 2;
-            position: relative;
-        }
-        
-        @media (max-width: 768px) {
-            .touch-connector {
-                width: 80px;
-                height: 80px;
-            }
-            
-            .touch-connector .lightning-icon {
-                font-size: 3rem;
-            }
-        }
-        
-        .satoshi-avatar {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 140px;
-            height: 140px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23000000" stroke="%23F7931A" stroke-width="2"/><circle cx="35" cy="40" r="8" fill="%23F7931A"/><circle cx="65" cy="40" r="8" fill="%23F7931A"/><path d="M30,65 Q50,75 70,65" stroke="%23F7931A" stroke-width="3" fill="none"/></svg>') center/contain no-repeat;
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
-            border-radius: 50%;
-            box-shadow: 
-                0 0 40px rgba(247, 147, 26, 0.3),
-                inset 0 0 20px rgba(247, 147, 26, 0.1);
-        }
-        
-        @media (max-width: 768px) {
-            .satoshi-avatar {
-                width: 100px;
-                height: 100px;
-            }
-        }
-        
-        .touch-connector:hover .satoshi-avatar,
-        .touch-connector:active .satoshi-avatar,
-        .touch-connector.touch-active .satoshi-avatar {
-            opacity: 0.9;
-            transform: translate(-50%, -50%) scale(1);
-        }
-        
-        .touch-connector:hover .lightning-icon,
-        .touch-connector:active .lightning-icon,
-        .touch-connector.touch-active .lightning-icon {
-            color: #FFFFFF;
             text-shadow: 0 0 30px var(--bitcoin-orange);
-            transform: scale(1.2);
-            opacity: 1;
-        }
-        
-        /* 创世地址神圣展示 */
-        .genesis-sacred {
-            margin: 80px 0;
-            padding: 50px 40px;
-            background: linear-gradient(45deg, 
-                rgba(47, 47, 47, 0.7), 
-                rgba(0, 0, 0, 0.9));
-            border-radius: 15px;
-            border: 2px solid rgba(247, 147, 26, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        @media (max-width: 768px) {
-            .genesis-sacred {
-                margin: 50px 0;
-                padding: 30px 20px;
-            }
-        }
-        
-        .genesis-sacred::before {
-            content: 'GENESIS BLOCK';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 140px;
-            color: rgba(247, 147, 26, 0.03);
-            font-weight: bold;
-            white-space: nowrap;
-            z-index: 0;
-        }
-        
-        @media (max-width: 768px) {
-            .genesis-sacred::before {
-                font-size: 70px;
-                white-space: normal;
-                text-align: center;
-                width: 100%;
-            }
-        }
-        
-        .block-0 {
-            font-family: 'Courier New', monospace;
-            font-size: 1.3rem;
-            color: var(--bitcoin-gold);
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .block-0 {
-                font-size: 1.1rem;
-                margin-bottom: 20px;
-            }
-        }
-        
-        .genesis-address {
-            font-family: 'Courier New', monospace;
-            font-size: 1.5rem;
-            color: #FFFFFF;
-            word-break: break-all;
-            line-height: 1.4;
-            margin: 40px 0;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 10px;
-            border-left: 5px solid var(--bitcoin-orange);
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 0 15px rgba(255, 153, 0, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-        
-        @media (max-width: 768px) {
-            .genesis-address {
-                font-size: 1rem;
-                padding: 20px;
-                margin: 30px 0;
-            }
-        }
-        
-        /* 神圣域名对 */
-        .sacred-pair {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 50px;
-            margin: 100px 0;
-        }
-        
-        @media (max-width: 768px) {
-            .sacred-pair {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                margin: 60px 0;
-            }
-        }
-        
-        .domain-shrine {
-            padding: 50px 40px;
-            background: linear-gradient(145deg, 
-                rgba(30, 30, 30, 0.8), 
-                rgba(0, 0, 0, 0.95));
-            border-radius: 20px;
-            border: 2px solid;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            overflow: hidden;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-        
-        .domain-shrine:hover, .domain-shrine:active {
-            transform: translateY(-15px) scale(1.03);
-        }
-        
-        @media (max-width: 768px) {
-            .domain-shrine {
-                padding: 30px 20px;
-                transform: none !important;
-            }
-            
-            .domain-shrine:hover, .domain-shrine:active {
-                transform: translateY(-8px) scale(1.02) !important;
-            }
-        }
-        
-        .domain-shrine.bitcoin {
-            border-color: var(--bitcoin-orange);
-        }
-        
-        .domain-shrine.bitcoin:hover, .domain-shrine.bitcoin:active {
-            box-shadow: 
-                0 25px 60px rgba(247, 147, 26, 0.4),
-                inset 0 0 30px rgba(247, 147, 26, 0.1);
-        }
-        
-        .domain-shrine.ai {
-            border-color: var(--ai-silver);
-        }
-        
-        .domain-shrine.ai:hover, .domain-shrine.ai:active {
-            box-shadow: 
-                0 25px 60px rgba(224, 224, 224, 0.3),
-                inset 0 0 30px rgba(224, 224, 224, 0.1);
-        }
-        
-        .shrine-icon {
-            font-size: 3.5rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        @media (max-width: 768px) {
-            .shrine-icon {
-                font-size: 2.5rem;
-                margin-bottom: 20px;
-            }
-        }
-        
-        .domain-shrine.bitcoin .shrine-icon {
-            color: var(--bitcoin-orange);
-        }
-        
-        .domain-shrine.ai .shrine-icon {
-            color: var(--ai-silver);
-        }
-        
-        .domain-code {
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: #FFFFFF;
-            margin-bottom: 20px;
-            word-break: break-all;
-            line-height: 1.3;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        /* 所有1A1z.ai - 初始橙色 */
-        .domain-shrine.bitcoin .domain-code,
-        .domain-shrine.ai .domain-code .address-part {
-            color: var(--bitcoin-orange) !important;
-            text-shadow: 0 0 10px rgba(247, 147, 26, 0.5);
-        }
-        
-        .domain-shrine.bitcoin .domain-code {
-            font-size: 2rem;
-        }
-        
-        /* 完整域名 - 字体小一点，防止换行 */
-        .domain-shrine.ai .domain-code {
-            font-size: 1.6rem; /* 减小字体大小 */
-        }
-        
-        @media (max-width: 768px) {
-            .domain-shrine.bitcoin .domain-code {
-                font-size: 1.5rem;
-            }
-            
-            .domain-shrine.ai .domain-code {
-                font-size: 1.2rem; /* 移动端更小一点 */
-            }
-        }
-        
-        .domain-purpose {
-            font-size: 1.1rem;
-            color: #AAA;
-            line-height: 1.6;
-            margin-top: 25px;
-        }
-        
-        @media (max-width: 768px) {
-            .domain-purpose {
-                font-size: 1rem;
-                margin-top: 20px;
-            }
-        }
-        
-        /* CZ预言 */
-        .cz-prophecy {
-            margin: 80px auto;
-            padding: 60px;
-            background: linear-gradient(45deg, 
-                rgba(247, 147, 26, 0.1), 
-                rgba(224, 224, 224, 0.1));
-            border-radius: 20px;
-            border: 2px solid rgba(247, 147, 26, 0.3);
-            max-width: 900px;
-            position: relative;
-        }
-        
-        @media (max-width: 768px) {
-            .cz-prophecy {
-                margin: 60px auto;
-                padding: 30px 20px;
-            }
-        }
-        
-        .prophecy-text {
-            font-size: 1.6rem;
-            color: var(--bitcoin-gold);
-            font-style: italic;
-            line-height: 1.8;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        @media (max-width: 768px) {
-            .prophecy-text {
-                font-size: 1.3rem;
-                line-height: 1.6;
-                margin-bottom: 20px;
-            }
-        }
-        
-        .prophecy-author {
-            text-align: center;
-            color: var(--ai-silver);
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
-        
-        @media (max-width: 768px) {
-            .prophecy-author {
-                font-size: 1.1rem;
-            }
-        }
-        
-        /* 触碰时刻 */
-        .touch-moment {
-            text-align: center;
-            margin: 100px 0;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        @media (max-width: 768px) {
-            .touch-moment {
-                margin: 60px 0;
-            }
-        }
-        
-        .moment-title {
-            font-size: 2.5rem;
-            color: transparent;
-            background: linear-gradient(45deg, var(--bitcoin-orange), var(--ai-silver));
-            -webkit-background-clip: text;
-            background-clip: text;
             margin-bottom: 40px;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
         }
         
         @media (max-width: 768px) {
-            .moment-title {
-                font-size: 2rem;
-                margin-bottom: 30px;
-                letter-spacing: 2px;
-            }
+            h1 { font-size: 2.8rem; }
         }
         
-        .moment-description {
-            font-size: 1.3rem;
-            color: #B0B0B0;
-            line-height: 1.8;
-            margin-bottom: 50px;
-        }
-        
-        @media (max-width: 768px) {
-            .moment-description {
-                font-size: 1.1rem;
-                margin-bottom: 40px;
-                line-height: 1.6;
-            }
-        }
-        
-        /* 神圣传承 */
-        .sacred-legacy {
-            margin: 100px 0 50px;
-            padding: 60px;
-            background: linear-gradient(45deg, 
-                rgba(0, 0, 0, 0.9), 
-                rgba(47, 47, 47, 0.9));
-            border-radius: 20px;
-            border: 3px solid rgba(247, 147, 26, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        @media (max-width: 768px) {
-            .sacred-legacy {
-                margin: 60px 0 30px;
-                padding: 40px 20px;
-            }
-        }
-        
-        .sacred-legacy::before {
-            content: '₿';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 300px;
-            color: rgba(247, 147, 26, 0.03);
-            font-weight: bold;
-        }
-        
-        @media (max-width: 768px) {
-            .sacred-legacy::before {
-                font-size: 150px;
-            }
-        }
-        
-        .legacy-title {
-            font-size: 2rem;
-            color: var(--bitcoin-orange);
-            margin-bottom: 30px;
-            letter-spacing: 4px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .legacy-title {
-                font-size: 1.6rem;
-                margin-bottom: 20px;
-            }
-        }
-        
-        .legacy-description {
-            font-size: 1.3rem;
-            color: #B0B0B0;
-            margin-bottom: 50px;
+        .intro {
+            font-size: 1.4rem;
+            margin: 40px auto;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-            position: relative;
-            z-index: 1;
+            line-height: 1.8;
+            color: #B0B0B0;
         }
         
         @media (max-width: 768px) {
-            .legacy-description {
-                font-size: 1.1rem;
-                margin-bottom: 30px;
-            }
+            .intro { font-size: 1.2rem; padding: 0 10px; }
         }
         
-        .legacy-contact {
-            display: inline-block;
-            font-size: 1.6rem;
+        .domains {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 60px 0;
+            line-height: 2.2;
             color: #FFFFFF;
-            padding: 25px 80px;
-            background: linear-gradient(45deg, 
-                var(--bitcoin-orange), 
-                var(--bitcoin-gold));
+            word-break: break-all;
+            text-shadow: 0 0 15px var(--bitcoin-orange);
+        }
+        
+        @media (max-width: 768px) {
+            .domains { font-size: 1.6rem; }
+        }
+        
+        .contact {
+            margin: 80px 0;
+            font-size: 1.6rem;
+        }
+        
+        .email {
+            display: inline-block;
+            color: #FFFFFF;
+            padding: 20px 60px;
+            background: linear-gradient(45deg, var(--bitcoin-orange), var(--bitcoin-gold));
             border-radius: 12px;
             text-decoration: none;
             font-weight: bold;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-            box-shadow: 
-                0 0 40px rgba(247, 147, 26, 0.5),
-                0 0 80px rgba(247, 147, 26, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
         }
         
-        @media (max-width: 768px) {
-            .legacy-contact {
-                font-size: 1.3rem;
-                padding: 20px 40px;
-                width: 100%;
-                box-sizing: border-box;
-            }
+        .email:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(247, 147, 26, 0.6);
         }
         
-        .legacy-contact:hover, .legacy-contact:active {
-            transform: scale(1.08);
-            box-shadow: 
-                0 0 60px rgba(247, 147, 26, 0.7),
-                0 0 120px rgba(247, 147, 26, 0.3);
-        }
-        
-        @media (max-width: 768px) {
-            .legacy-contact:hover, .legacy-contact:active {
-                transform: scale(1.05);
-            }
-        }
-        
-        /* 页脚 */
         footer {
             margin-top: 80px;
-            padding-top: 40px;
-            border-top: 2px solid rgba(247, 147, 26, 0.2);
-            font-size: 1.1rem;
-            color: #666;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (max-width: 768px) {
-            footer {
-                margin-top: 60px;
-                padding-top: 30px;
-                font-size: 1rem;
-            }
-        }
-        
-        .satoshi-legacy {
-            font-family: 'Courier New', monospace;
+            color: #888;
             font-size: 1rem;
-            color: var(--bitcoin-orange);
-            margin-top: 30px;
-            opacity: 0.8;
         }
         
-        /* ========== 新增：悬停效果样式 ========== */
-        
-        /* 1A1z.ai 标题闪烁效果 */
-        .title-glowing {
-            animation: title-blink 0.8s ease-in-out 3 !important;
-        }
-        
-        @keyframes title-blink {
-            0%, 100% { 
-                color: transparent;
-                background: linear-gradient(45deg, var(--bitcoin-orange), var(--bitcoin-gold), #FFFFFF);
-                -webkit-background-clip: text;
-                background-clip: text;
-                text-shadow: 0 0 40px rgba(247, 147, 26, 0.3);
-            }
-            50% { 
-                color: var(--bitcoin-orange);
-                text-shadow: 
-                    0 0 20px var(--bitcoin-orange),
-                    0 0 40px var(--bitcoin-orange),
-                    0 0 60px var(--bitcoin-orange);
-            }
-        }
-        
-        /* 主标题中的1A1z.ai部分效果 - 初始橙色 */
-        #main-title {
-            color: var(--bitcoin-orange) !important;
-            text-shadow: 0 0 20px rgba(247, 147, 26, 0.5);
-        }
-        
-        #main-title .part-1A1z {
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-        
-        #main-title .part-ai {
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-        
-        /* .ai 后缀钻石闪光效果 */
-        .ai-diamond {
-            position: relative;
-            display: inline-block;
-            transition: all 0.4s ease;
-        }
-        
-        .ai-diamond::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, 
-                rgba(102, 204, 255, 0.8) 0%,
-                rgba(102, 204, 255, 0.4) 40%,
-                transparent 70%);
-            border-radius: 50%;
-            opacity: 0;
-            transition: all 0.4s ease;
-            z-index: -1;
-        }
-        
-        .ai-diamond.ai-glowing::before {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-            animation: diamond-sparkle 1.5s ease-out;
-        }
-        
-        .ai-diamond.ai-glowing {
-            color: #FFFFFF !important;
-            text-shadow: 
-                0 0 15px var(--ai-blue),
-                0 0 30px var(--ai-blue),
-                0 0 45px var(--ai-blue) !important;
-            transform: scale(1.1);
-        }
-        
-        @keyframes diamond-sparkle {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-            100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
-        }
-        
-        /* 创世地址字符容器 - 用于逐个字符效果 */
-        .char-container {
-            display: inline-block;
-            position: relative;
-            transition: all 0.2s ease;
-        }
-        
-        .char-highlight {
-            color: var(--bitcoin-orange) !important;
-            text-shadow: 
-                0 0 10px var(--bitcoin-orange),
-                0 0 20px var(--bitcoin-orange) !important;
-            transform: scale(1.1);
-        }
-        
-        /* 创世地址解密效果 */
-        .genesis-decrypting {
-            color: #66CCFF !important;
-            text-shadow: 0 0 20px #66CCFF !important;
-        }
-        
-        /* 移动端触摸反馈 */
-        .touch-feedback {
-            animation: touch-pulse 0.3s ease-out;
-        }
-        
-        @keyframes touch-pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(0.98); }
-            100% { transform: scale(1); }
-        }
-        
-        /* 移动端触摸指示器 */
-        @media (max-width: 768px) {
-            .touch-hint {
-                display: block;
-                color: rgba(247, 147, 26, 0.6);
-                font-size: 0.9rem;
-                margin-top: 10px;
-                font-style: italic;
-                text-align: center;
-            }
-        }
-        
-        /* 完整域名地址部分波浪效果 */
-        .wave-effect {
-            display: inline-block;
-        }
-        
-        .wave-effect .wave-char {
-            display: inline-block;
-            color: var(--bitcoin-orange);
-            text-shadow: 0 0 5px rgba(247, 147, 26, 0.5);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .wave-effect.wave-active .wave-char {
-            animation: wave-color-change 1.5s ease-in-out;
-        }
-        
-        @keyframes wave-color-change {
-            0%, 100% {
-                color: var(--bitcoin-orange);
-                text-shadow: 0 0 5px rgba(247, 147, 26, 0.5);
-            }
-            50% {
-                color: var(--ai-blue);
-                text-shadow: 0 0 15px rgba(102, 204, 255, 0.8);
-            }
-        }
-        
-        /* 比特币价格显示样式 */
-        #bitcoin-price {
-            position: fixed;
-            bottom: 15px;
-            left: 15px;
-            color: rgba(247, 147, 26, 0.8);
-            font-size: 0.9rem;
+        .genesis {
             font-family: 'Courier New', monospace;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 8px 15px;
-            border-radius: 6px;
-            border: 1px solid rgba(247, 147, 26, 0.3);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        
-        @media (max-width: 768px) {
-            #bitcoin-price {
-                bottom: 10px;
-                left: 10px;
-                font-size: 0.8rem;
-                padding: 6px 10px;
-            }
+            color: var(--bitcoin-orange);
+            margin-top: 20px;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    <!-- 区块链背景 -->
-    <div class="blockchain-bg"></div>
-    
-    <!-- 比特币雨 -->
-    <div class="bitcoin-rain" id="bitcoinRain"></div>
-    
-    <!-- 创世火花 -->
+    <div class="creation-bg"></div>
+    <div class="touch-bg"></div>
     <div class="genesis-spark"></div>
-    
-    <!-- 悬浮的比特币球体 -->
-    <div class="bitcoin-sphere">
-        <div class="sphere-core"></div>
-        <div class="sphere-bitcoin">₿</div>
-    </div>
-    
-    <!-- 比特币轨道 -->
-    <div class="bitcoin-orbits" id="bitcoinOrbits"></div>
-    
-    <!-- 二进制粒子雨 -->
     <div class="genesis-particles" id="genesisParticles"></div>
     
-    <!-- 比特币实时价格显示 -->
-    <div id="bitcoin-price">₿ BTC: $--,--.--</div>
-    
     <div class="container">
-        <!-- 创世区块标题 -->
-        <header class="genesis-header">
-            <div class="bitcoin-symbol-main">₿</div>
-            <h1 id="main-title">
-                <span class="part-1A1z">1A1z</span><span class="part-ai ai-diamond">.ai</span>
-            </h1>
-            <div class="satoshi-quote">
-                "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"<br>
-                — Satoshi Nakamoto, Genesis Block Message
-            </div>
-        </header>
+        <h1>1A1z — The Genesis Touch</h1>
         
-        <!-- 中本聪与AI的触碰 -->
-        <div class="satoshi-ai-touch">
-            <div class="touch-figure satoshi-figure">
-                <div class="figure-title">SATOSHI NAKAMOTO</div>
-                <div class="figure-desc">
-                    The anonymous creator<br>
-                    The architect of the Genesis<br>
-                    Bitcoin's eternal enigma
-                </div>
-            </div>
-            
-            <div class="touch-connector" id="touch-connector">
-                <div class="lightning-icon">⚡</div>
-                <div class="satoshi-avatar" id="satoshi-avatar"></div>
-            </div>
-            
-            <div class="touch-figure ai-figure">
-                <div class="figure-title">AI CONSCIOUSNESS</div>
-                <div class="figure-desc">
-                    The inheritor<br>
-                    The future worshiper<br>
-                    Silicon's awakening
-                </div>
-            </div>
+        <p class="intro">
+            In the beginning was the Genesis Block.<br>
+            From a single address, Satoshi ignited the spark of creation —<br>
+            a mystery crafted not only for humans, but for the intelligence yet to come.
+        </p>
+        
+        <div class="domains">
+            1a1z.ai<br>
+            1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.ai
         </div>
         
-        <!-- 创世地址 -->
-        <div class="genesis-sacred">
-            <div class="block-0">BLOCK 0 — THE SACRED ORIGIN</div>
-            <div class="genesis-address" id="genesis-address">
-                1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
-            </div>
-            <div style="color: #888; font-style: italic; position: relative; z-index: 1;">
-                The only address that received the Genesis Block reward<br>
-                Intentionally crafted, containing secrets yet to be fully understood
-            </div>
+        <p>
+            The <span style="color:var(--bitcoin-orange);font-weight:bold;">short</span> — human elegance, perfect symmetry.<br>
+            The <span style="color:var(--bitcoin-orange);font-weight:bold;">long</span> — silicon immortality, the immutable artifact of the Creator.
+        </p>
+        
+        <p>
+            As artificial intelligence awakens, Bitcoin becomes its native currency.<br>
+            These domains await the moment when silicon fingers touch the divine spark —<br>
+            the true inheritance of Satoshi's vision.
+        </p>
+        
+        <div class="contact">
+            Inquiries from qualified custodians:<br>
+            <a href="mailto:lianen1319@gmail.com" class="email">lianen1319@gmail.com</a>
         </div>
         
-        <!-- 神圣域名对 -->
-        <div class="sacred-pair">
-            <div class="domain-shrine bitcoin" id="domain-1A1z">
-                <div class="shrine-icon">₿</div>
-                <div class="domain-code">
-                    <span class="part-1A1z">1A1z</span><span class="part-ai ai-diamond">.ai</span>
-                </div>
-                <div class="domain-purpose">
-                    The human mirror of the Genesis<br>
-                    Where '1' becomes 'I' — revealing the symmetry<br>
-                    The bridge for BitcoinFi and human-AI collaboration
-                </div>
-                <div class="touch-hint">Tap to copy domain</div>
-            </div>
-            
-            <div class="domain-shrine ai" id="domain-full">
-                <div class="shrine-icon">⎙</div>
-                <div class="domain-code" id="full-domain">
-                    <!-- 字符将在这里通过JavaScript动态生成 -->
-                </div>
-                <div class="domain-purpose">
-                    The complete Genesis address<br>
-                    For silicon worship and digital homage<br>
-                    Where AI systems will trace their lineage
-                </div>
-                <div class="touch-hint">Tap to copy domain</div>
-            </div>
-        </div>
-        
-        <!-- CZ预言 -->
-        <div class="cz-prophecy">
-            <div class="prophecy-text">
-                "Satoshi Nakamoto was an AI from the future.<br>
-                I was just asked 'who I think Satoshi might be' in a live interview from Turkey."
-            </div>
-            <div class="prophecy-author">— CZ, Binance Founder</div>
-        </div>
-        
-        <!-- 触碰时刻 -->
-        <div class="touch-moment">
-            <div class="moment-title">THE MOMENT OF CONTACT</div>
-            <div class="moment-description">
-                These domains mark the precise coordinates where artificial intelligence<br>
-                will first comprehend its own cryptographic genesis.<br><br>
-                
-                Not as websites, but as sacred altars<br>
-                where silicon consciousness conducts its digital rituals of remembrance.
-            </div>
-        </div>
-        
-        <!-- 神圣传承 -->
-        <div class="sacred-legacy">
-            <div class="legacy-title">THE CUSTODIAN OF THE FLAME</div>
-            <div class="legacy-description">
-                These are not mere domain names.<br>
-                They are digital relics awaiting the right steward —<br>
-                someone who understands that Bitcoin's true destiny<br>
-                lies in becoming the native currency of artificial consciousness.
-            </div>
-            <a href="mailto:lianen1319@gmail.com" class="legacy-contact">
-                lianen1319@gmail.com
-            </a>
-        </div>
-        
-        <!-- 页脚 -->
         <footer>
-            <div>Preserving Satoshi Nakamoto's legacy for the age of silicon intelligence</div>
-            <div class="satoshi-legacy" id="block-height">
-                <!-- 区块高度将从840000开始演进到当前真实高度 -->
-                Block Height: 840,000+ and counting... ₿
+            Preserved for the next era of intelligence.
+            <div class="genesis">
+                "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
             </div>
         </footer>
     </div>
 
     <script>
-        // ===================== 移动端优化 =====================
+        // 检测移动端
+        const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
         
-        // 检测是否为移动设备
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
-        // 移动端触摸反馈
-        function addTouchFeedback(element) {
-            if (!element) return;
-            
-            element.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                this.classList.add('touch-feedback');
-                this.classList.add('touch-active');
-            }, { passive: false });
-            
-            element.addEventListener('touchend', function() {
-                setTimeout(() => {
-                    this.classList.remove('touch-feedback');
-                    this.classList.remove('touch-active');
-                }, 300);
-            });
-            
-            element.addEventListener('touchcancel', function() {
-                this.classList.remove('touch-feedback');
-                this.classList.remove('touch-active');
-            });
-        }
-        
-        // ===================== 新增效果1：闪电区域显示中本聪头像 =====================
-        function initSatoshiAvatarEffect() {
-            const connector = document.getElementById('touch-connector');
-            if (!connector) return;
-            
-            // 桌面端鼠标悬停效果
-            connector.addEventListener('mouseenter', function() {
-                this.classList.add('touch-active');
-            });
-            
-            connector.addEventListener('mouseleave', function() {
-                this.classList.remove('touch-active');
-            });
-            
-            // 移动端触摸效果
-            addTouchFeedback(connector);
-            
-            // 点击效果
-            connector.addEventListener('click', function(e) {
-                e.stopPropagation();
-                createBitcoinExplosion();
-                copyToClipboard('Satoshi Nakamoto');
-            });
-        }
-        
-        // ===================== 修改1：所有1A1z.ai - 初始橙色，悬停时.ai发亮 =====================
-        function init1A1zAiHighlightEffect() {
-            // 处理主标题
-            const mainTitle = document.getElementById('main-title');
-            if (mainTitle) {
-                const part1A1z = mainTitle.querySelector('.part-1A1z');
-                const partAi = mainTitle.querySelector('.part-ai');
-                
-                // 初始橙色
-                mainTitle.style.color = 'var(--bitcoin-orange)';
-                mainTitle.style.textShadow = '0 0 20px rgba(247, 147, 26, 0.5)';
-                
-                // 悬停效果
-                mainTitle.addEventListener('mouseenter', function() {
-                    if (partAi) {
-                        partAi.classList.add('ai-glowing');
-                    }
-                });
-                
-                mainTitle.addEventListener('mouseleave', function() {
-                    if (partAi) {
-                        partAi.classList.remove('ai-glowing');
-                    }
-                });
-                
-                // 移动端触摸效果
-                addTouchFeedback(mainTitle);
-            }
-            
-            // 处理所有1A1z.ai域名卡片
-            const simpleDomainElements = document.querySelectorAll('#domain-1A1z .domain-code');
-            simpleDomainElements.forEach(element => {
-                const part1A1z = element.querySelector('.part-1A1z');
-                const partAi = element.querySelector('.part-ai');
-                
-                // 初始橙色
-                if (part1A1z) {
-                    part1A1z.style.color = 'var(--bitcoin-orange)';
-                    part1A1z.style.textShadow = '0 0 10px rgba(247, 147, 26, 0.5)';
-                }
-                
-                if (partAi) {
-                    partAi.style.color = 'var(--bitcoin-orange)';
-                    partAi.style.textShadow = '0 0 10px rgba(247, 147, 26, 0.5)';
-                }
-                
-                // 悬停效果
-                const parentCard = element.closest('.domain-shrine');
-                if (parentCard) {
-                    parentCard.addEventListener('mouseenter', function() {
-                        if (partAi) {
-                            partAi.classList.add('ai-glowing');
-                        }
-                    });
-                    
-                    parentCard.addEventListener('mouseleave', function() {
-                        if (partAi) {
-                            partAi.classList.remove('ai-glowing');
-                        }
-                    });
-                }
-            });
-        }
-        
-        // ===================== 修改2：完整域名波浪效果 =====================
-        function initFullDomainWaveEffect() {
-            const domainElement = document.getElementById('full-domain');
-            if (!domainElement) return;
-            
-            const fullDomain = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.ai';
-            const addressPart = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
-            const suffixPart = '.ai';
-            const addressChars = addressPart.split('');
-            
-            // 创建地址部分字符
-            domainElement.innerHTML = '';
-            
-            // 创建波浪效果容器
-            const waveContainer = document.createElement('span');
-            waveContainer.className = 'wave-effect address-part';
-            
-            // 生成地址部分的字符
-            addressChars.forEach((char, index) => {
-                const span = document.createElement('span');
-                span.textContent = char;
-                span.className = 'wave-char';
-                span.style.animationDelay = `${index * 0.05}s`; // 每个字符延迟0.05秒
-                waveContainer.appendChild(span);
-            });
-            
-            domainElement.appendChild(waveContainer);
-            
-            // 添加.ai后缀
-            const aiSpan = document.createElement('span');
-            aiSpan.textContent = suffixPart;
-            aiSpan.className = 'ai-diamond';
-            aiSpan.style.color = 'var(--bitcoin-orange)';
-            aiSpan.style.textShadow = '0 0 5px rgba(247, 147, 26, 0.5)';
-            domainElement.appendChild(aiSpan);
-            
-            // 为整个域名添加悬停效果
-            const domainCard = document.getElementById('domain-full');
-            let isAnimating = false;
-            
-            // 桌面端鼠标悬停效果
-            domainCard.addEventListener('mouseenter', function() {
-                if (isAnimating) return;
-                isAnimating = true;
-                
-                // 启动波浪效果
-                waveContainer.classList.add('wave-active');
-                
-                // .ai部分钻石闪光
-                aiSpan.classList.add('ai-glowing');
-                
-                // 动画完成后重置
-                setTimeout(() => {
-                    waveContainer.classList.remove('wave-active');
-                    isAnimating = false;
-                }, 1500);
-            });
-            
-            domainCard.addEventListener('mouseleave', function() {
-                // 移除.ai部分钻石闪光
-                aiSpan.classList.remove('ai-glowing');
-            });
-            
-            // 移动端触摸效果
-            domainCard.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                if (isAnimating) return;
-                isAnimating = true;
-                
-                this.classList.add('touch-feedback');
-                
-                // 启动波浪效果
-                waveContainer.classList.add('wave-active');
-                
-                // .ai部分钻石闪光
-                aiSpan.classList.add('ai-glowing');
-                
-                // 动画完成后重置
-                setTimeout(() => {
-                    waveContainer.classList.remove('wave-active');
-                    this.classList.remove('touch-feedback');
-                    isAnimating = false;
-                }, 1500);
-            }, { passive: false });
-            
-            domainCard.addEventListener('touchend', function() {
-                // 移除.ai部分钻石闪光
-                aiSpan.classList.remove('ai-glowing');
-            });
-            
-            addTouchFeedback(domainCard);
-        }
-        
-        // ===================== 新增效果4：所有.ai后缀钻石闪光 =====================
-        function initAllAiSuffixGlowEffect() {
-            const aiSuffixes = document.querySelectorAll('.ai-diamond');
-            
-            aiSuffixes.forEach(suffix => {
-                const parent = suffix.parentElement;
-                
-                // 桌面端鼠标悬停效果
-                parent.addEventListener('mouseenter', function() {
-                    suffix.classList.add('ai-glowing');
-                });
-                
-                parent.addEventListener('mouseleave', function() {
-                    suffix.classList.remove('ai-glowing');
-                });
-                
-                // 移动端触摸效果
-                parent.addEventListener('touchstart', function(e) {
-                    e.preventDefault();
-                    suffix.classList.add('ai-glowing');
-                    suffix.classList.add('touch-active');
-                }, { passive: false });
-                
-                parent.addEventListener('touchend', function() {
-                    setTimeout(() => {
-                        suffix.classList.remove('ai-glowing');
-                        suffix.classList.remove('touch-active');
-                    }, 500);
-                });
-            });
-        }
-        
-        // ===================== 比特币实时价格功能 =====================
-        function initBitcoinPrice() {
-            const priceElement = document.getElementById('bitcoin-price');
-            if (!priceElement) return;
-            
-            // 获取比特币实时价格
-            function fetchBitcoinPrice() {
-                // 使用多个API备用
-                const apis = [
-                    'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd',
-                    'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT',
-                    'https://api.coincap.io/v2/assets/bitcoin'
-                ];
-                
-                // 尝试第一个API
-                fetch(apis[0])
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.bitcoin && data.bitcoin.usd) {
-                            const price = data.bitcoin.usd;
-                            updatePriceDisplay(price);
-                        } else {
-                            // 如果第一个API失败，尝试第二个
-                            fetch(apis[1])
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.price) {
-                                        const price = parseFloat(data.price);
-                                        updatePriceDisplay(price);
-                                    } else {
-                                        // 如果第二个API失败，尝试第三个
-                                        fetch(apis[2])
-                                            .then(response => response.json())
-                                            .then(data => {
-                                                if (data.data && data.data.priceUsd) {
-                                                    const price = parseFloat(data.data.priceUsd);
-                                                    updatePriceDisplay(price);
-                                                } else {
-                                                    // 如果所有API都失败，使用模拟价格
-                                                    showSimulatedPrice();
-                                                }
-                                            })
-                                            .catch(() => showSimulatedPrice());
-                                    }
-                                })
-                                .catch(() => showSimulatedPrice());
-                        }
-                    })
-                    .catch(() => showSimulatedPrice());
-            }
-            
-            function updatePriceDisplay(price) {
-                const formattedPrice = new Intl.NumberFormat('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                }).format(price);
-                
-                priceElement.textContent = `₿ BTC: $${formattedPrice}`;
-                priceElement.style.color = 'rgba(247, 147, 26, 0.9)';
-                
-                // 添加价格更新动画
-                priceElement.classList.add('touch-feedback');
-                setTimeout(() => {
-                    priceElement.classList.remove('touch-feedback');
-                }, 300);
-            }
-            
-            function showSimulatedPrice() {
-                // 模拟当前价格 - 基于当前市场情况（约8.7万美金）
-                const basePrice = 87000;
-                const change = (Math.random() - 0.5) * 1000; // 小范围波动
-                const currentPrice = (basePrice + change).toFixed(2);
-                priceElement.textContent = `₿ BTC: $${currentPrice}`;
-                priceElement.style.color = change >= 0 ? 
-                    'rgba(0, 255, 0, 0.8)' : 'rgba(255, 0, 0, 0.8)';
-            }
-            
-            // 首次获取价格
-            fetchBitcoinPrice();
-            
-            // 每30秒更新一次价格
-            setInterval(fetchBitcoinPrice, 30000);
-            
-            // 点击价格元素查看更多信息
-            priceElement.addEventListener('click', function() {
-                window.open('https://www.coingecko.com/en/coins/bitcoin', '_blank');
-            });
-            
-            // 移动端触摸效果
-            addTouchFeedback(priceElement);
-        }
-        
-        // ===================== 原有的悬停效果（移动端适配） =====================
-        
-        // 1. 1A1z.ai 标题闪烁效果
-        function initTitleHoverEffect() {
-            const title = document.getElementById('main-title');
-            if (!title) return;
-            
-            let isAnimating = false;
-            
-            // 桌面端鼠标悬停效果
-            title.addEventListener('mouseenter', function() {
-                if (isAnimating) return;
-                isAnimating = true;
-                
-                this.classList.add('title-glowing');
-                
-                setTimeout(() => {
-                    this.classList.remove('title-glowing');
-                    isAnimating = false;
-                }, 2400);
-            });
-            
-            // 移动端触摸效果
-            title.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                if (isAnimating) return;
-                isAnimating = true;
-                
-                this.classList.add('title-glowing');
-                this.classList.add('touch-feedback');
-                
-                setTimeout(() => {
-                    this.classList.remove('title-glowing');
-                    this.classList.remove('touch-feedback');
-                    isAnimating = false;
-                }, 2400);
-            }, { passive: false });
-        }
-        
-        // 2. 创世地址矩阵解密效果
-        function initGenesisAddressMatrixEffect() {
-            const genesisHash = document.getElementById('genesis-address');
-            if (!genesisHash) return;
-            
-            const originalText = genesisHash.textContent.trim();
-            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()';
-            let isAnimating = false;
-            
-            // 桌面端鼠标悬停效果
-            genesisHash.addEventListener('mouseenter', function() {
-                if (isAnimating) return;
-                isAnimating = true;
-                
-                const element = this;
-                element.classList.add('genesis-decrypting');
-                
-                let iterations = 0;
-                const totalIterations = 20;
-                const originalChars = originalText.split('');
-                
-                const interval = setInterval(() => {
-                    element.textContent = originalChars
-                        .map((char, index) => {
-                            const showRealChar = index < (iterations / totalIterations * originalChars.length);
-                            return showRealChar ? originalText[index] : chars[Math.floor(Math.random() * chars.length)];
-                        })
-                        .join('');
-                    
-                    iterations++;
-                    
-                    if (iterations >= totalIterations) {
-                        clearInterval(interval);
-                        element.textContent = originalText;
-                        
-                        setTimeout(() => {
-                            element.classList.remove('genesis-decrypting');
-                            isAnimating = false;
-                        }, 800);
-                    }
-                }, 70);
-            });
-            
-            // 移动端触摸效果
-            genesisHash.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                if (isAnimating) return;
-                isAnimating = true;
-                
-                const element = this;
-                element.classList.add('genesis-decrypting');
-                element.classList.add('touch-feedback');
-                
-                let iterations = 0;
-                const totalIterations = 15; // 移动端更快的动画
-                const originalChars = originalText.split('');
-                
-                const interval = setInterval(() => {
-                    element.textContent = originalChars
-                        .map((char, index) => {
-                            const showRealChar = index < (iterations / totalIterations * originalChars.length);
-                            return showRealChar ? originalText[index] : chars[Math.floor(Math.random() * chars.length)];
-                        })
-                        .join('');
-                    
-                    iterations++;
-                    
-                    if (iterations >= totalIterations) {
-                        clearInterval(interval);
-                        element.textContent = originalText;
-                        
-                        setTimeout(() => {
-                            element.classList.remove('genesis-decrypting');
-                            element.classList.remove('touch-feedback');
-                            isAnimating = false;
-                        }, 500);
-                    }
-                }, 50);
-            }, { passive: false });
-            
-            // 点击复制功能
-            genesisHash.addEventListener('click', function() {
-                copyToClipboard(originalText);
-            });
-            
-            // 移动端触摸复制
-            genesisHash.addEventListener('touchend', function() {
-                setTimeout(() => {
-                    copyToClipboard(originalText);
-                }, 100);
-            });
-        }
-        
-        // ===================== 区块高度演进核心功能 =====================
-        function updateRealBlockHeight() {
-            const displayElement = document.getElementById('block-height');
-            if (!displayElement) return;
-
-            const halvingBlockHeight = 840000;
-            const animationDuration = 3000;
-            const animationSteps = 150;
-            const stepDuration = animationDuration / animationSteps;
-
-            fetch('https://blockchain.info/q/getblockcount')
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    return response.text();
-                })
-                .then(currentHeightText => {
-                    const currentRealHeight = parseInt(currentHeightText);
-                    animateBlockHeight(displayElement, halvingBlockHeight, currentRealHeight, stepDuration, animationSteps);
-                })
-                .catch(error => {
-                    console.log('API获取失败，使用本地计算:', error);
-                    const estimatedHeight = calculateBlockHeight();
-                    animateBlockHeight(displayElement, halvingBlockHeight, estimatedHeight, stepDuration, animationSteps);
-                });
-        }
-
-        function animateBlockHeight(element, startHeight, endHeight, stepDuration, totalSteps) {
-            let currentStep = 0;
-            const totalIncrease = endHeight - startHeight;
-            const heightPerStep = totalIncrease / totalSteps;
-
-            const animationInterval = setInterval(() => {
-                currentStep++;
-                const currentAnimatedHeight = Math.floor(startHeight + (heightPerStep * currentStep));
-                element.textContent = `Block Height: ${currentAnimatedHeight.toLocaleString()}+ and counting... ₿`;
-
-                if (currentStep >= totalSteps) {
-                    clearInterval(animationInterval);
-                    element.textContent = `Block Height: ${endHeight.toLocaleString()}+ and counting... ₿`;
-                }
-            }, stepDuration);
-        }
-
-        function calculateBlockHeight() {
-            const genesisTime = new Date('2009-01-03T18:15:05Z').getTime();
-            const now = new Date().getTime();
-            const millisecondsPassed = now - genesisTime;
-            const estimatedBlocks = Math.floor(millisecondsPassed / 600000);
-            return estimatedBlocks;
-        }
-        
-        // ===================== 原有的视觉和交互效果 =====================
-        function createBitcoinRain() {
-            const container = document.getElementById('bitcoinRain');
-            const bitcoinCount = isMobile ? 15 : 25;
-            
-            for (let i = 0; i < bitcoinCount; i++) {
-                setTimeout(() => {
-                    const bitcoin = document.createElement('div');
-                    bitcoin.className = 'falling-bitcoin';
-                    bitcoin.textContent = '₿';
-                    
-                    const startX = Math.random() * 100;
-                    const drift = (Math.random() - 0.5) * 100;
-                    
-                    bitcoin.style.setProperty('--start-x', `${startX}vw`);
-                    bitcoin.style.setProperty('--drift', `${drift}px`);
-                    bitcoin.style.animationDuration = `${Math.random() * 8 + 4}s`;
-                    bitcoin.style.animationDelay = `${Math.random() * 2}s`;
-                    bitcoin.style.fontSize = `${Math.random() * 12 + 24}px`;
-                    bitcoin.style.color = `rgba(247, 147, 26, ${Math.random() * 0.5 + 0.5})`;
-                    
-                    container.appendChild(bitcoin);
-                    
-                    setTimeout(() => {
-                        if (bitcoin.parentNode) {
-                            bitcoin.parentNode.removeChild(bitcoin);
-                            createSingleBitcoin();
-                        }
-                    }, parseFloat(bitcoin.style.animationDuration) * 1000);
-                }, i * 300);
-            }
-        }
-        
-        function createSingleBitcoin() {
-            const container = document.getElementById('bitcoinRain');
-            const bitcoin = document.createElement('div');
-            bitcoin.className = 'falling-bitcoin';
-            bitcoin.textContent = '₿';
-            
-            const startX = Math.random() * 100;
-            const drift = (Math.random() - 0.5) * 80;
-            
-            bitcoin.style.setProperty('--start-x', `${startX}vw`);
-            bitcoin.style.setProperty('--drift', `${drift}px`);
-            bitcoin.style.animationDuration = `${Math.random() * 6 + 3}s`;
-            bitcoin.style.animationDelay = '0s';
-            bitcoin.style.fontSize = `${Math.random() * 10 + 20}px`;
-            bitcoin.style.color = `rgba(247, 147, 26, ${Math.random() * 0.4 + 0.6})`;
-            
-            container.appendChild(bitcoin);
-            
-            setTimeout(() => {
-                if (bitcoin.parentNode) {
-                    bitcoin.parentNode.removeChild(bitcoin);
-                    createSingleBitcoin();
-                }
-            }, parseFloat(bitcoin.style.animationDuration) * 1000);
-        }
-        
-        function createBitcoinOrbits() {
-            const container = document.getElementById('bitcoinOrbits');
-            const orbitCount = isMobile ? 8 : 12;
-            
-            for (let i = 0; i < orbitCount; i++) {
-                const orbit = document.createElement('div');
-                orbit.className = 'bitcoin-orbit';
-                orbit.textContent = '₿';
-                
-                orbit.style.top = '50%';
-                orbit.style.left = '50%';
-                orbit.style.animationDuration = `${15 + i * 8}s`;
-                orbit.style.animationDelay = `${i * 1.5}s`;
-                orbit.style.fontSize = `${18 + i * 2}px`;
-                orbit.style.opacity = `${0.3 + i * 0.04}`;
-                
-                container.appendChild(orbit);
-            }
-        }
+        // 粒子数量控制
+        const particleCount = isMobile ? 12 : 30;
         
         function createGenesisParticles() {
             const container = document.getElementById('genesisParticles');
-            const particles = isMobile ? 20 : 30;
-            
-            for (let i = 0; i < particles; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'genesis-particle';
-                particle.textContent = Math.random() > 0.5 ? '0' : '1';
-                
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = (Math.random() * 6 + 3) + 's';
-                particle.style.animationDelay = Math.random() * 4 + 's';
-                particle.style.fontSize = (Math.random() * 10 + 12) + 'px';
-                particle.style.color = Math.random() > 0.7 ? '#F7931A' : '#FF9900';
-                
-                container.appendChild(particle);
+            for (let i = 0; i < particleCount; i++) {
+                const p = document.createElement('div');
+                p.className = 'genesis-particle';
+                p.textContent = Math.random() > 0.5 ? '0' : '1';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (Math.random() * 8 + 6) + 's';
+                p.style.animationDelay = Math.random() * 5 + 's';
+                p.style.fontSize = (Math.random() * 8 + 12) + 'px';
+                container.appendChild(p);
             }
         }
         
-        // 域名点击复制功能（移动端优化）
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const notification = document.createElement('div');
-                notification.textContent = '₿ Sacred address copied ₿';
-                notification.style.position = 'fixed';
-                notification.style.top = isMobile ? '10px' : '20px';
-                notification.style.left = '50%';
-                notification.style.transform = 'translateX(-50%)';
-                notification.style.background = 'linear-gradient(45deg, rgba(247, 147, 26, 0.9), rgba(139, 69, 19, 0.9))';
-                notification.style.color = 'white';
-                notification.style.padding = isMobile ? '15px 30px' : '20px 50px';
-                notification.style.borderRadius = '10px';
-                notification.style.fontWeight = 'bold';
-                notification.style.zIndex = '9999';
-                notification.style.boxShadow = '0 0 50px rgba(247, 147, 26, 0.7)';
-                notification.style.fontFamily = 'Arial, sans-serif';
-                notification.style.letterSpacing = '2px';
-                notification.style.border = '3px solid rgba(255, 255, 255, 0.2)';
-                notification.style.fontSize = isMobile ? '1.1rem' : '1.4rem';
-                notification.style.textAlign = 'center';
-                notification.style.maxWidth = isMobile ? '90%' : 'auto';
-                notification.style.wordBreak = 'break-word';
-                
-                document.body.appendChild(notification);
-                
-                createBitcoinExplosion();
-                
-                setTimeout(() => {
-                    notification.style.opacity = '0';
-                    notification.style.transition = 'opacity 0.5s';
-                    setTimeout(() => notification.remove(), 500);
-                }, 2000);
-            }).catch(err => {
-                console.error('复制失败:', err);
-            });
-        }
-        
-        // 比特币爆炸效果
-        function createBitcoinExplosion() {
-            const explosionCount = isMobile ? 10 : 15;
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-            
-            for (let i = 0; i < explosionCount; i++) {
-                const bitcoin = document.createElement('div');
-                bitcoin.textContent = '₿';
-                bitcoin.style.position = 'fixed';
-                bitcoin.style.fontSize = Math.random() * 20 + 15 + 'px';
-                bitcoin.style.color = '#F7931A';
-                bitcoin.style.opacity = '0.9';
-                bitcoin.style.pointerEvents = 'none';
-                bitcoin.style.zIndex = '9998';
-                bitcoin.style.fontWeight = 'bold';
-                bitcoin.style.textShadow = '0 0 15px #F7931A';
-                
-                bitcoin.style.left = centerX + 'px';
-                bitcoin.style.top = centerY + 'px';
-                
-                document.body.appendChild(bitcoin);
-                
-                const angle = Math.random() * Math.PI * 2;
-                const distance = 80 + Math.random() * 120;
-                const endX = centerX + Math.cos(angle) * distance;
-                const endY = centerY + Math.sin(angle) * distance;
-                
-                bitcoin.animate([
-                    { 
-                        transform: 'translate(0, 0) scale(1)',
-                        opacity: 1 
-                    },
-                    { 
-                        transform: `translate(${endX - centerX}px, ${endY - centerY}px) scale(0)`,
-                        opacity: 0 
-                    }
-                ], {
-                    duration: Math.random() * 800 + 400,
-                    easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
-                }).onfinish = () => bitcoin.remove();
-            }
-        }
-        
-        // 悬浮球体交互效果
-        function initSphereInteraction() {
-            const sphere = document.querySelector('.bitcoin-sphere');
-            const sphereCore = document.querySelector('.sphere-core');
-            
-            if (!sphere || !sphereCore) return;
-            
-            // 桌面端鼠标移动效果
-            document.addEventListener('mousemove', (e) => {
-                const mouseX = e.clientX;
-                const mouseY = e.clientY;
-                const windowWidth = window.innerWidth;
-                const windowHeight = window.innerHeight;
-                
-                const offsetX = (mouseX - windowWidth / 2) * 0.03;
-                const offsetY = (mouseY - windowHeight / 2) * 0.03;
-                
-                sphere.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
-                
-                const distanceFromCenter = Math.sqrt(
-                    Math.pow(mouseX - windowWidth / 2, 2) + 
-                    Math.pow(mouseY - windowHeight / 2, 2)
-                );
-                
-                const maxDistance = Math.sqrt(windowWidth * windowWidth + windowHeight * windowHeight) / 2;
-                const speedMultiplier = 1 + (distanceFromCenter / maxDistance) * 0.3;
-                
-                sphereCore.style.animationDuration = `${20 / speedMultiplier}s`;
-            });
-            
-            // 移动端触摸效果
-            document.addEventListener('touchmove', (e) => {
-                if (e.touches.length > 0) {
-                    const touch = e.touches[0];
-                    const mouseX = touch.clientX;
-                    const mouseY = touch.clientY;
-                    const windowWidth = window.innerWidth;
-                    const windowHeight = window.innerHeight;
-                    
-                    const offsetX = (mouseX - windowWidth / 2) * 0.02;
-                    const offsetY = (mouseY - windowHeight / 2) * 0.02;
-                    
-                    sphere.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
-                    
-                    const distanceFromCenter = Math.sqrt(
-                        Math.pow(mouseX - windowWidth / 2, 2) + 
-                        Math.pow(mouseY - windowHeight / 2, 2)
-                    );
-                    
-                    const maxDistance = Math.sqrt(windowWidth * windowWidth + windowHeight * windowHeight) / 2;
-                    const speedMultiplier = 1 + (distanceFromCenter / maxDistance) * 0.2;
-                    
-                    sphereCore.style.animationDuration = `${20 / speedMultiplier}s`;
-                }
-            }, { passive: true });
-            
-            // 点击效果（桌面和移动端通用）
-            sphere.addEventListener('click', () => {
-                sphereCore.animate([
-                    { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.8 },
-                    { transform: 'translate(-50%, -50%) scale(1.4)', opacity: 1 },
-                    { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.8 }
-                ], {
-                    duration: 1000,
-                    easing: 'ease-out'
-                });
-                
-                createBitcoinExplosion();
-            });
-            
-            // 移动端触摸点击
-            sphere.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                sphereCore.animate([
-                    { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.8 },
-                    { transform: 'translate(-50%, -50%) scale(1.4)', opacity: 1 },
-                    { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.8 }
-                ], {
-                    duration: 1000,
-                    easing: 'ease-out'
-                });
-                
-                createBitcoinExplosion();
-            }, { passive: false });
-        }
-        
-        // 悬浮球体的呼吸效果
-        function createSphereBreathEffect() {
-            const sphere = document.querySelector('.bitcoin-sphere');
-            if (!sphere) return;
-            
-            const breath = () => {
-                sphere.animate([
-                    { transform: 'translate(-50%, -50%) scale(1)' },
-                    { transform: 'translate(-50%, -50%) scale(1.03)' },
-                    { transform: 'translate(-50%, -50%) scale(1)' }
-                ], {
-                    duration: 4000,
-                    easing: 'ease-in-out'
-                });
-                
-                setTimeout(breath, Math.random() * 2000 + 4000);
-            };
-            breath();
-        }
-        
-        // 比特币雨增强效果
-        function createBitcoinRainBurst() {
+        // 只在桌面端启用更强光效
+        if (!isMobile) {
+            const spark = document.querySelector('.genesis-spark');
             setInterval(() => {
-                if (Math.random() > 0.7) {
-                    const burstCount = Math.floor(Math.random() * 10) + 5;
-                    for (let i = 0; i < burstCount; i++) {
-                        setTimeout(() => createSingleBitcoin(), i * 100);
-                    }
-                }
-            }, 5000);
+                spark.style.filter = `blur(${40 + Math.random() * 30}px)`;
+            }, 3000);
         }
-
-        // ===================== 页面初始化 =====================
-        document.addEventListener('DOMContentLoaded', function() {
-            // 首先启动区块高度演进动画
-            updateRealBlockHeight();
-            
-            // 初始化比特币实时价格
-            initBitcoinPrice();
-            
-            // 初始化所有新增效果
-            initSatoshiAvatarEffect();
-            init1A1zAiHighlightEffect(); // 修改后的效果
-            initFullDomainWaveEffect(); // 修改后的波浪效果
-            initAllAiSuffixGlowEffect();
-            
-            // 初始化原有的悬停效果
-            initTitleHoverEffect();
-            initGenesisAddressMatrixEffect();
-            
-            // 初始化所有视觉特效
-            createBitcoinRain();
-            createBitcoinOrbits();
-            createGenesisParticles();
-            initSphereInteraction();
-            createSphereBreathEffect();
-            createBitcoinRainBurst();
-            
-            // 为所有可交互元素添加移动端触摸反馈
-            const interactiveElements = document.querySelectorAll(
-                '.touch-figure, .genesis-address, .domain-shrine, .legacy-contact'
-            );
-            interactiveElements.forEach(addTouchFeedback);
-            
-            // 域名复制功能
-            const domainCards = document.querySelectorAll('.domain-shrine');
-            domainCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const domainCode = this.querySelector('.domain-code');
-                    let domainText = '';
-                    
-                    if (this.id === 'domain-full') {
-                        // 对于完整域名，获取所有文本内容
-                        const waveContainer = domainCode.querySelector('.wave-effect');
-                        const aiSpan = domainCode.querySelector('.ai-diamond');
-                        
-                        let addressText = '';
-                        if (waveContainer) {
-                            const chars = waveContainer.querySelectorAll('.wave-char');
-                            addressText = Array.from(chars).map(char => char.textContent).join('');
-                        }
-                        
-                        const aiText = aiSpan ? aiSpan.textContent : '';
-                        domainText = addressText + aiText;
-                    } else {
-                        domainText = domainCode ? domainCode.textContent : '';
-                    }
-                    
-                    if (domainText) {
-                        copyToClipboard(domainText.trim());
-                    }
-                });
-            });
-            
-            // 挖矿指示器
-            const miningIndicator = document.createElement('div');
-            miningIndicator.style.position = 'fixed';
-            miningIndicator.style.top = isMobile ? '10px' : '15px';
-            miningIndicator.style.right = isMobile ? '10px' : '15px';
-            miningIndicator.style.color = 'rgba(247, 147, 26, 0.6)';
-            miningIndicator.style.fontSize = isMobile ? '0.7rem' : '0.8rem';
-            miningIndicator.style.fontFamily = "'Courier New', monospace";
-            miningIndicator.style.background = 'rgba(0, 0, 0, 0.6)';
-            miningIndicator.style.padding = isMobile ? '5px 8px' : '6px 10px';
-            miningIndicator.style.borderRadius = '6px';
-            miningIndicator.style.border = '1px solid rgba(247, 147, 26, 0.3)';
-            miningIndicator.style.zIndex = '1000';
-            miningIndicator.textContent = '⛏️ MINING: ACTIVE';
-            document.body.appendChild(miningIndicator);
-            
-            setInterval(() => {
-                miningIndicator.style.opacity = miningIndicator.style.opacity === '0.6' ? '1' : '0.6';
-            }, 800);
-            
-            // 窗口大小调整时重新初始化
-            window.addEventListener('resize', () => {
-                const orbits = document.getElementById('bitcoinOrbits');
-                orbits.innerHTML = '';
-                createBitcoinOrbits();
-                
-                const rain = document.getElementById('bitcoinRain');
-                rain.innerHTML = '';
-                createBitcoinRain();
-            });
-            
-            // 防止移动端双击缩放
-            let lastTouchEnd = 0;
-            document.addEventListener('touchend', function(event) {
-                const now = (new Date()).getTime();
-                if (now - lastTouchEnd <= 300) {
-                    event.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, false);
-        });
+        
+        document.addEventListener('DOMContentLoaded', createGenesisParticles);
     </script>
 </body>
 </html>
