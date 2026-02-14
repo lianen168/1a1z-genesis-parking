@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>1A1z.ai | The Genesis Singularity</title>
-    <meta name="description" content="Digital Currency is the Natural Layer for Artificial Intelligence.">
+    <meta name="description" content="Digital Currency is the Natural Layer for AI.">
     <!-- 引入科幻与代码字体 -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -74,7 +74,7 @@
             z-index: 10;
         }
 
-        /* ================= 3. 英雄区域 (Dual Domain Showcase) ================= */
+        /* ================= 3. 英雄区域 ================= */
         header {
             text-align: center;
             margin-bottom: 60px;
@@ -103,23 +103,26 @@
         }
         @keyframes blink { 50% { opacity: 0.3; } }
 
-        /* 核心标语 */
+        /* 核心标语 - 字号调小 */
         .core-slogan {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(24px, 4vw, 36px);
-            font-weight: 700;
-            line-height: 1.3;
+            /* 调整字号：手机16px -> 桌面24px */
+            font-size: clamp(16px, 2.5vw, 24px); 
+            font-weight: 600;
+            line-height: 1.4;
             margin-bottom: 50px;
             text-transform: uppercase;
+            /* 使用更细腻的渐变 */
             background: linear-gradient(90deg, #fff, var(--text-sub));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            max-width: 900px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             border-bottom: 1px solid var(--border);
             padding-bottom: 30px;
+            opacity: 0.9;
         }
 
         /* 双域名展示台 */
@@ -132,7 +135,6 @@
             perspective: 1000px;
         }
 
-        /* 通用标题样式 */
         .domain-display {
             font-family: 'JetBrains Mono', monospace;
             font-weight: 800;
@@ -141,7 +143,6 @@
             position: relative;
         }
 
-        /* BTC 部分特效: 故障+火焰 */
         .part-btc {
             color: var(--btc-core);
             text-shadow: 0 0 10px var(--btc-core);
@@ -149,7 +150,6 @@
             animation: glitch-anim 3s infinite alternate;
         }
         
-        /* AI 部分特效: 霓虹+扫描 */
         .part-ai {
             color: var(--ai-core);
             text-shadow: 0 0 15px var(--ai-core);
@@ -157,10 +157,8 @@
             animation: neon-pulse 2s infinite;
         }
 
-        /* 短域名 */
         .short-domain { font-size: clamp(48px, 10vw, 80px); letter-spacing: -2px; }
 
-        /* 长域名容器 */
         .long-domain-container {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
@@ -173,7 +171,7 @@
         }
         
         .long-domain {
-            font-size: clamp(14px, 3vw, 20px); /* 手机端更小 */
+            font-size: clamp(14px, 3vw, 20px);
             word-break: break-all;
             line-height: 1.5;
             color: #ddd;
@@ -192,7 +190,33 @@
             100% { text-shadow: 0 0 10px var(--ai-core); opacity: 0.8; }
         }
 
-        /* ================= 4. 销售卡片 ================= */
+        /* ================= 4. SVG 动画系统 (替代Emoji) ================= */
+        .icon-svg {
+            width: 48px;
+            height: 48px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        /* SVG 动画关键帧 */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes dash { to { stroke-dashoffset: 0; } }
+        @keyframes flicker { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
+        @keyframes pulse-core { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
+
+        /* 人类/钥匙动画样式 */
+        .icon-human circle { stroke: var(--btc-core); fill: none; stroke-width: 2; }
+        .icon-human .ring-outer { transform-origin: center; animation: spin 10s linear infinite; opacity: 0.5; }
+        .icon-human .core { fill: var(--btc-core); animation: pulse-core 3s ease-in-out infinite; }
+        .icon-human path { stroke: var(--btc-core); stroke-width: 2; stroke-linecap: round; }
+
+        /* AI/芯片动画样式 */
+        .icon-ai rect { stroke: var(--ai-core); fill: none; stroke-width: 2; }
+        .icon-ai .circuit { stroke-dasharray: 20; stroke-dashoffset: 20; animation: dash 3s linear infinite; }
+        .icon-ai .core-chip { animation: flicker 2s infinite; fill: var(--ai-core); opacity: 0.4; }
+        .icon-ai path { stroke: var(--ai-core); stroke-width: 2; }
+
+        /* ================= 5. 销售卡片 ================= */
         .grid-sales {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -221,18 +245,9 @@
         .card-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
-            align-items: center;
+            margin-bottom: 10px;
+            align-items: flex-start;
         }
-        
-        .icon-box {
-            width: 50px; height: 50px;
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px;
-        }
-        .icon-btc { background: rgba(255, 159, 28, 0.1); border: 1px solid var(--btc-core); color: var(--btc-core); }
-        .icon-ai { background: rgba(0, 240, 255, 0.1); border: 1px solid var(--ai-core); color: var(--ai-core); }
 
         .financing-tag {
             font-size: 11px;
@@ -241,6 +256,7 @@
             background: rgba(255,255,255,0.1);
             color: #aaa;
             font-family: 'JetBrains Mono';
+            margin-top: 5px;
         }
 
         .card-title {
@@ -263,6 +279,7 @@
         .price-section {
             border-top: 1px solid var(--border);
             padding-top: 20px;
+            margin-top: auto;
         }
         .price-val { font-family: 'Orbitron'; font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 15px; }
         
@@ -279,7 +296,7 @@
         .btn-secondary { background: transparent; border: 1px solid var(--ai-core); color: var(--ai-core); }
         .btn-secondary:hover { background: rgba(0, 240, 255, 0.1); box-shadow: 0 0 20px var(--ai-glow); }
 
-        /* ================= 5. 底部悬浮栏 ================= */
+        /* ================= 6. 底部悬浮栏 ================= */
         .float-bar {
             position: fixed;
             bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -334,9 +351,9 @@
         <header>
             <div class="status-pill"><span class="blink-dot"></span>SYSTEM ONLINE</div>
             
-            <!-- 核心标语 -->
+            <!-- 核心标语：已缩小字号 -->
             <div class="core-slogan">
-                "Digital Currency is the Natural Layer for Artificial Intelligence"
+                "Digital Currency is the Natural Layer for AI"
             </div>
 
             <!-- 双域名展示区 -->
@@ -347,7 +364,7 @@
                     <span class="part-btc">1A1z</span><span class="part-ai">.ai</span>
                 </div>
 
-                <!-- 2. 长域名展示 (打字机效果容器) -->
+                <!-- 2. 长域名展示 -->
                 <div class="long-domain-container">
                     <div class="domain-display long-domain">
                         <span class="part-btc" id="longBtc">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</span><span class="part-ai">.ai</span>
@@ -363,7 +380,12 @@
             <!-- 卡片 1: 人类接口 -->
             <div class="card">
                 <div class="card-header">
-                    <div class="icon-box icon-btc">₿</div>
+                    <!-- 动态 SVG: 核心入口/钥匙 -->
+                    <svg class="icon-svg icon-human" viewBox="0 0 48 48">
+                        <circle class="ring-outer" cx="24" cy="24" r="20" stroke-dasharray="4 4" />
+                        <circle class="core" cx="24" cy="24" r="6" />
+                        <path d="M24 10 L24 4 M24 44 L24 38 M10 24 L4 24 M44 24 L38 24" />
+                    </svg>
                     <span class="financing-tag">12-Month Financing</span>
                 </div>
                 <h2 class="card-title">1A1z.ai</h2>
@@ -382,10 +404,14 @@
             <!-- 卡片 2: 机器身份 -->
             <div class="card">
                 <div class="card-header">
-                    <div class="icon-box icon-ai">⟠</div>
+                    <!-- 动态 SVG: AI/芯片/数据 -->
+                    <svg class="icon-svg icon-ai" viewBox="0 0 48 48">
+                        <rect class="circuit" x="8" y="8" width="32" height="32" rx="4" />
+                        <rect class="core-chip" x="18" y="18" width="12" height="12" />
+                        <path d="M24 8 L24 2 M24 46 L24 40 M8 24 L2 24 M46 24 L40 24" />
+                    </svg>
                     <span class="financing-tag">12-Month Financing</span>
                 </div>
-                <!-- 长域名展示 -->
                 <h2 class="card-title long">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.ai</h2>
                 <p class="card-desc">
                     The <strong>Machine Identity</strong>. A cryptographic mirror of the Genesis Address. <br>
@@ -417,11 +443,11 @@
     </div>
 
     <script>
-        // 1. 动态粒子雨 (高性能版)
+        // 1. 动态粒子雨
         function initRain() {
             const container = document.getElementById('rainLayer');
             const isMobile = window.innerWidth < 768;
-            const count = isMobile ? 15 : 30; // 手机端严格控制数量
+            const count = isMobile ? 15 : 30; 
             const symbols = ['1', '0', '₿', 'Ξ', 'AI'];
 
             for(let i=0; i<count; i++) {
@@ -438,21 +464,15 @@
             }
         }
 
-        // 2. 长域名打字机特效 (Typewriter Effect)
+        // 2. 长域名打字机特效
         function typeWriterEffect() {
             const btcSpan = document.getElementById('longBtc');
             const fullText = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
             
-            // 只有在屏幕可见时才触发，这里简化为循环动画
-            let i = 0;
-            let direction = 1; // 1 for type, -1 for delete
-            
             // 简单的随机乱码解密效果
             setInterval(() => {
                 const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                // 随机替换其中一个字符制造"计算中"的感觉
                 const randIndex = Math.floor(Math.random() * fullText.length);
-                const originalChar = fullText[randIndex];
                 
                 // 临时变乱码
                 const splitText = fullText.split('');
@@ -460,12 +480,12 @@
                 btcSpan.innerText = splitText.join('');
                 btcSpan.style.color = "#fff"; // Flash white
 
-                // 50ms后恢复
+                // 恢复
                 setTimeout(() => {
                     btcSpan.innerText = fullText;
-                    btcSpan.style.color = ""; // Revert color
+                    btcSpan.style.color = ""; 
                 }, 100);
-            }, 2000); // 每2秒闪烁一次
+            }, 2000); 
         }
 
         // 3. 复制功能
