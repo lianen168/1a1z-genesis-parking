@@ -19,6 +19,8 @@
             --border: rgba(255, 255, 255, 0.1);
             --text-main: #Eaeaea;
             --text-sub: #8899AA;
+            --success: #00ff9d;
+            --error: #ff4757;
         }
 
         * {
@@ -101,18 +103,17 @@
             margin-right: 8px;
             animation: blink 1s infinite;
         }
+
         @keyframes blink { 50% { opacity: 0.3; } }
 
-        /* 核心标语 - 字号调小 */
+        /* 核心标语 */
         .core-slogan {
             font-family: 'Orbitron', sans-serif;
-            /* 调整字号：手机16px -> 桌面24px */
             font-size: clamp(16px, 2.5vw, 24px); 
             font-weight: 600;
             line-height: 1.4;
             margin-bottom: 50px;
             text-transform: uppercase;
-            /* 使用更细腻的渐变 */
             background: linear-gradient(90deg, #fff, var(--text-sub));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -190,27 +191,23 @@
             100% { text-shadow: 0 0 10px var(--ai-core); opacity: 0.8; }
         }
 
-        /* ================= 4. SVG 动画系统 (替代Emoji) ================= */
+        /* ================= 4. SVG 动画系统 ================= */
         .icon-svg {
             width: 48px;
             height: 48px;
             display: block;
             margin-bottom: 20px;
         }
-
-        /* SVG 动画关键帧 */
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes dash { to { stroke-dashoffset: 0; } }
         @keyframes flicker { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
         @keyframes pulse-core { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
 
-        /* 人类/钥匙动画样式 */
         .icon-human circle { stroke: var(--btc-core); fill: none; stroke-width: 2; }
         .icon-human .ring-outer { transform-origin: center; animation: spin 10s linear infinite; opacity: 0.5; }
         .icon-human .core { fill: var(--btc-core); animation: pulse-core 3s ease-in-out infinite; }
         .icon-human path { stroke: var(--btc-core); stroke-width: 2; stroke-linecap: round; }
 
-        /* AI/芯片动画样式 */
         .icon-ai rect { stroke: var(--ai-core); fill: none; stroke-width: 2; }
         .icon-ai .circuit { stroke-dasharray: 20; stroke-dashoffset: 20; animation: dash 3s linear infinite; }
         .icon-ai .core-chip { animation: flicker 2s infinite; fill: var(--ai-core); opacity: 0.4; }
@@ -235,7 +232,6 @@
             flex-direction: column;
             backdrop-filter: blur(10px);
         }
-
         .card:hover {
             transform: translateY(-5px);
             border-color: rgba(255, 255, 255, 0.3);
@@ -248,7 +244,6 @@
             margin-bottom: 10px;
             align-items: flex-start;
         }
-
         .financing-tag {
             font-size: 11px;
             padding: 4px 10px;
@@ -267,7 +262,6 @@
             word-break: break-all;
         }
         .card-title.long { font-size: 16px; color: var(--ai-core); }
-
         .card-desc {
             font-size: 15px;
             color: var(--text-sub);
@@ -289,14 +283,97 @@
             font-family: 'Orbitron'; font-weight: 700; font-size: 14px;
             border-radius: 10px; transition: all 0.3s;
         }
-        
         .btn-primary { background: #fff; color: #000; }
         .btn-primary:hover { box-shadow: 0 0 20px rgba(255,255,255,0.4); transform: scale(1.02); }
         
         .btn-secondary { background: transparent; border: 1px solid var(--ai-core); color: var(--ai-core); }
         .btn-secondary:hover { background: rgba(0, 240, 255, 0.1); box-shadow: 0 0 20px var(--ai-glow); }
 
-        /* ================= 6. 底部悬浮栏 ================= */
+        /* ================= 6. 报价系统 (Terminal Style) ================= */
+        .offer-section {
+            margin-top: 50px;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+        .offer-terminal {
+            background: rgba(10, 10, 12, 0.95);
+            border: 1px dashed #444;
+            border-left: 4px solid var(--btc-core);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .offer-terminal::before {
+            content: '/// PROTOCOL: NEGOTIATION';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--bg-deep);
+            color: var(--text-sub);
+            font-family: 'JetBrains Mono';
+            font-size: 12px;
+            padding: 0 10px;
+        }
+        
+        .offer-title {
+            font-family: 'JetBrains Mono';
+            color: var(--btc-core);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .offer-desc {
+            font-family: 'Rajdhani';
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        .terminal-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            padding: 14px;
+            color: #fff;
+            font-family: 'JetBrains Mono';
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        .terminal-input:focus {
+            outline: none;
+            border-color: var(--btc-core);
+            box-shadow: 0 0 15px rgba(255, 159, 28, 0.2);
+        }
+
+        .btn-transmit {
+            width: 100%;
+            background: var(--btc-core);
+            color: #000;
+            border: none;
+            padding: 14px;
+            font-family: 'Orbitron';
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 4px;
+        }
+        .btn-transmit:hover {
+            background: #fff;
+            box-shadow: 0 0 20px var(--btc-glow);
+        }
+        .btn-transmit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        #form-status { margin-top: 15px; font-family: 'JetBrains Mono'; font-size: 0.9rem; display: none; }
+        .status-success { color: var(--success); }
+        .status-error { color: var(--error); }
+
+
+        /* ================= 7. 底部悬浮栏 ================= */
         .float-bar {
             position: fixed;
             bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -337,11 +414,11 @@
             .float-bar { flex-direction: column; gap: 15px; padding: 20px; }
             .bar-content { width: 100%; display: flex; justify-content: space-between; align-items: center; }
             .copy-btn { width: 100%; }
+            .offer-terminal { padding: 20px; }
         }
     </style>
 </head>
 <body>
-
     <!-- 背景特效 -->
     <div class="rain-layer" id="rainLayer"></div>
     <div class="toast" id="toast">✅ Copied: joshua369x@gmail.com</div>
@@ -351,26 +428,23 @@
         <header>
             <div class="status-pill"><span class="blink-dot"></span>SYSTEM ONLINE</div>
             
-            <!-- 核心标语：已缩小字号 -->
+            <!-- 核心标语 -->
             <div class="core-slogan">
                 "Digital Currency is the Natural Layer for AI"
             </div>
 
             <!-- 双域名展示区 -->
             <div class="showcase-stage">
-                
                 <!-- 1. 短域名展示 -->
                 <div class="domain-display short-domain">
                     <span class="part-btc">1A1z</span><span class="part-ai">.ai</span>
                 </div>
-
                 <!-- 2. 长域名展示 -->
                 <div class="long-domain-container">
                     <div class="domain-display long-domain">
                         <span class="part-btc" id="longBtc">1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</span><span class="part-ai">.ai</span>
                     </div>
                 </div>
-
             </div>
         </header>
 
@@ -380,7 +454,6 @@
             <!-- 卡片 1: 人类接口 -->
             <div class="card">
                 <div class="card-header">
-                    <!-- 动态 SVG: 核心入口/钥匙 -->
                     <svg class="icon-svg icon-human" viewBox="0 0 48 48">
                         <circle class="ring-outer" cx="24" cy="24" r="20" stroke-dasharray="4 4" />
                         <circle class="core" cx="24" cy="24" r="6" />
@@ -404,7 +477,6 @@
             <!-- 卡片 2: 机器身份 -->
             <div class="card">
                 <div class="card-header">
-                    <!-- 动态 SVG: AI/芯片/数据 -->
                     <svg class="icon-svg icon-ai" viewBox="0 0 48 48">
                         <rect class="circuit" x="8" y="8" width="32" height="32" rx="4" />
                         <rect class="core-chip" x="18" y="18" width="12" height="12" />
@@ -424,8 +496,33 @@
                     </a>
                 </div>
             </div>
-
         </div>
+
+        <!-- ================= 新增：报价系统 (Terminal Style) ================= -->
+        <div class="offer-section">
+            <div class="offer-terminal">
+                <div class="offer-title">> INITIATE_NEGOTIATION_PROTOCOL</div>
+                <p class="offer-desc">// System Status: Counter-offers are accepted. Enter data below.</p>
+
+                <form id="offerForm" action="https://formsubmit.co/joshua369x@gmail.com" method="POST">
+                    <!-- Config -->
+                    <input type="text" name="_honey" style="display:none">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="New Offer for 1A1z.ai (Genesis Bundle)">
+
+                    <div class="form-group">
+                        <input type="number" name="amount" class="terminal-input" placeholder="INPUT_AMOUNT_USD (e.g. 35000)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="terminal-input" placeholder="CONTACT_EMAIL_ADDRESS" required>
+                    </div>
+                    <button type="submit" class="btn-transmit">TRANSMIT_OFFER</button>
+                </form>
+
+                <div id="form-status"></div>
+            </div>
+        </div>
+        <!-- ================= 报价系统结束 ================= -->
 
     </div>
 
@@ -449,17 +546,13 @@
             const isMobile = window.innerWidth < 768;
             const count = isMobile ? 15 : 30; 
             const symbols = ['1', '0', '₿', 'Ξ', 'AI'];
-
             for(let i=0; i<count; i++) {
                 const p = document.createElement('div');
                 p.className = 'particle';
                 p.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-                
-                // 随机样式
                 p.style.left = Math.random() * 100 + '%';
                 p.style.fontSize = (Math.random() * 10 + 10) + 'px';
                 p.style.animation = `fall ${Math.random() * 5 + 4}s linear ${Math.random() * 5}s infinite`;
-                
                 container.appendChild(p);
             }
         }
@@ -468,19 +561,13 @@
         function typeWriterEffect() {
             const btcSpan = document.getElementById('longBtc');
             const fullText = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
-            
-            // 简单的随机乱码解密效果
             setInterval(() => {
                 const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                 const randIndex = Math.floor(Math.random() * fullText.length);
-                
-                // 临时变乱码
                 const splitText = fullText.split('');
                 splitText[randIndex] = chars[Math.floor(Math.random() * chars.length)];
                 btcSpan.innerText = splitText.join('');
-                btcSpan.style.color = "#fff"; // Flash white
-
-                // 恢复
+                btcSpan.style.color = "#fff"; 
                 setTimeout(() => {
                     btcSpan.innerText = fullText;
                     btcSpan.style.color = ""; 
@@ -494,11 +581,9 @@
             navigator.clipboard.writeText(email).then(() => {
                 const toast = document.getElementById('toast');
                 toast.classList.add('show');
-                
                 const btn = document.querySelector('.copy-btn');
                 const originalText = btn.innerText;
                 btn.innerText = "COPIED!";
-                
                 setTimeout(() => {
                     toast.classList.remove('show');
                     btn.innerText = originalText;
@@ -506,10 +591,60 @@
             });
         }
 
-        // 初始化
+        // 4. 报价系统逻辑 (FormSubmit + AJAX)
+        function initOfferForm() {
+            const form = document.getElementById('offerForm');
+            const statusDiv = document.getElementById('form-status');
+
+            if(form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const btn = form.querySelector('.btn-transmit');
+                    const originalText = btn.innerHTML;
+                    
+                    btn.innerHTML = "TRANSMITTING...";
+                    btn.disabled = true;
+
+                    const formData = new FormData(form);
+                    
+                    // Force AJAX URL
+                    let actionUrl = form.action;
+                    if(!actionUrl.includes('/ajax/')) {
+                        actionUrl = actionUrl.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+                    }
+
+                    fetch(actionUrl, { method: "POST", body: formData })
+                    .then(response => response.json())
+                    .then(data => {
+                        statusDiv.innerText = "> TRANSMISSION SUCCESSFUL. STAND BY.";
+                        statusDiv.className = "status-success";
+                        statusDiv.style.display = "block";
+                        form.reset();
+                        btn.innerHTML = "SENT";
+                        
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.disabled = false;
+                            statusDiv.style.display = "none";
+                        }, 3000);
+                    })
+                    .catch(error => {
+                        statusDiv.innerText = "> ERROR: SIGNAL LOST. RETRY.";
+                        statusDiv.className = "status-error";
+                        statusDiv.style.display = "block";
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    });
+                });
+            }
+        }
+
+        // 初始化所有脚本
         document.addEventListener('DOMContentLoaded', () => {
             initRain();
             typeWriterEffect();
+            initOfferForm(); // 新增初始化
         });
     </script>
 </body>
